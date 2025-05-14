@@ -84,6 +84,16 @@ A React component encapsulates the logic and styling for a piece of a UI. Compon
 
 The main component is the Page component, encompassing the whole window view. Within that component, three nested components are displayed side by side: the Title, Footer, and Login components. As you can see, the different sections of the UI can be expressed by different components that come together to create the full Page component. These individual components can then be reused elsewhere throughout the Facebook app, should they be relevant to other features.
 
+`Page`
+
+`Title`
+
+`Footer`
+
+`Login`
+
+`Page`
+
 > NAMING COMPONENTS
 > React’s documentation states that component names must begin with a capital letter; otherwise the names will be confused with HTML elements.
 
@@ -110,15 +120,38 @@ In fact, the demo app is structured just like your myFlix app. The demo project 
 
 Now that you’ve learned a bit more about the demo app, it’s time to create the first component. The first component will be MainView, which will house all the other components (as demonstrated in Figure 1). However, the first step is to prepare your directory following industry-standard protocols for React apps.
 
+`MainView`
+
 ## Prepare Your Directory
 
 To create your MainView component, create the following files and folders:
 
+`MainView`
+
 **Create Directory**
+
+```
+MainView
+```
+
+```
+main-view.jsx
+```
 
 **Create File**
 
 Once finished, your folder structure should look like this:
+
+```
+- src
+    - components
+      - main-view
+        - main-view.jsx
+    - index.html
+    - index.jsx
+    - index.scss
+  - package.json
+```
 
 Because of React’s component-based nature, you’ll want to always set up and organize your folder structure in this way, giving each component its own folder.
 
@@ -132,13 +165,45 @@ The folder structure just mentioned is the industry standard for development usi
 
 For your project in this Achievement, your MainView component will act as the main homepage of your myFlix SPA. From this homepage, users will be able to access information about different movies, create a profile, and so on. The MainView component of the demo app will follow this same structure, only in this case users will be able to access information about different JavaScript resources.
 
+`MainView`
+
+`MainView`
+
 It’s time to create the MainView component for the demo app! Open the newly created “main-view.jsx” file and write the following code:
+
+`MainView`
+
+```
+export const MainView = () => {
+  return (
+    <div>
+      <div>Eloquent JavaScript</div>
+      <div>Mastering JavaScript Functional Programming</div>
+      <div>JavaScript: The Good Parts</div>
+      <div>JavaScript: The Definitive Guide</div>
+      <div>The Road to React</div>
+    </div>
+  );
+};
+```
 
 Let’s dissect the code to better understand what it means.
 
 Starting from the top, you’ll see the line export const MainView = () => {.
 
+`export const MainView = () => {`
+
 Here, the export keyword exposes the MainView component. Exposing a component makes it available for use by other components, modules, and files—in other words, you’ll be able to import the component into other files. You learned how to import and export Node modules back in Exercise 2.2: Node.js Modules. This is the same concept, only with React components!
+
+`export`
+
+`MainView`
+
+`import`
+
+`import`
+
+`export`
 
 > DIFFERENCES IN SYNTAX: EXPORT
 > Sometimes, you may see the export keyword included on a separate line, like so:
@@ -153,11 +218,36 @@ Here, the export keyword exposes the MainView component. Exposing a component ma
 Differences in Syntax: Export
 Sometimes, you may see the export keyword included on a separate line, like so:
 
+`export`
+
+```
+const MainView = () => {
+  ...
+}
+export MainView;
+```
+
 Instead of being included with the const MainView = () => {...} line, the export MainView element has been given a line of its own. This is a different way to write the syntax, but it has no effect on the results!
+
+`const MainView = () => {...}`
+
+`export MainView`
 
 After the export keyword comes const MainView = () => {...}. This creates the MainView component. The const keyword states that the identifier MainView can't be reassigned.
 
+`export`
+
+`const MainView = () => {...}`
+
+`MainView`
+
+`const`
+
+`MainView`
+
 Then a function is assigned to MainView that returns the visual representation of the component—in other words, the function renders what will be displayed on the screen. Inside this function is JSX, though it looks like HTML code. JSX is similar to HTML—to the point that you could use plain HTML instead of JSX here if you wanted (barring a few exceptions). You’ll look at JSX more closely in the next section.
+
+`MainView`
 
 **JSX**
 
@@ -174,9 +264,18 @@ Then a function is assigned to MainView that returns the visual representation o
 Differences in Syntax: Functions
 This example used arrow function syntax, which is a succinct alternative to a traditional function expression. You can use either syntax to define your components:
 
+```
+function MainView() {
+  ...
+}
+export { MainView };
+```
+
 You can read more about arrow functions in the Mozilla docs.
 
 After adding this code, you now have a MainView component in your app. However, you haven’t used it anywhere yet, which is why nothing happened. Before getting into this next step, let’s go over a couple of concepts to be aware of when creating React components: root elements and JSX syntax.
+
+`MainView`
 
 **root elements**
 
@@ -188,9 +287,82 @@ A Component Can Only Have One Root Element
 
 A critical rule to remember is that a component can only have one root element when returning a chunk of UI. For instance, the following code will raise an error because there are two root elements: the outermost <div></div> and the newly added <button>.
 
+`<div></div>`
+
+`<button>`
+
+```
+export const MainView = () => {
+  return (
+    <div>
+      <div>Eloquent JavaScript</div>
+      <div>Mastering JavaScript Functional Programming</div>
+      <div>JavaScript: The Good Parts</div>
+      <div>JavaScript: The Definitive Guide</div>
+      <div>The Road to React</div>
+    </div>
+    <button>Test</button>
+  );
+}
+```
+
 To fix this, you need to surround the <div>...</div> and the <button>Test</button> with yet another <div> or <span>, grouping them together so they’re seen as part of the same overarching element. This is done in the following code:
 
+`<div>...</div>`
+
+`<button>Test</button>`
+
+`<div>`
+
+`<span>`
+
+```
+const MainView = () => {
+  return (
+    <div>
+      <div>
+        <div>Eloquent JavaScript</div>
+        <div>Mastering JavaScript Functional Programming</div>
+        <div>JavaScript: The Good Parts</div>
+        <div>JavaScript: The Definitive Guide</div>
+        <div>The Road to React</div>
+      </div>
+      <button>Test</button>
+    </div>
+  );
+}
+```
+
 Instead of a <div> or <span>, you can also use a piece of built-in React markup: <React.Fragment></React.Fragment>. This markup acts the same as if you were creating a new <div> or <span>, as can be seen in the following code:
+
+`<div>`
+
+`<span>`
+
+`<React.Fragment></React.Fragment>`
+
+`<div>`
+
+`<span>`
+
+```
+import React from "react";
+
+export const MainView = () => {
+  return (
+    <React.Fragment>
+      <div>
+        <div>Eloquent JavaScript</div>
+        <div>Mastering JavaScript Functional Programming</div>
+        <div>JavaScript: The Good Parts</div>
+        <div>JavaScript: The Definitive Guide</div>
+        <div>The Road to React</div>
+      </div>
+      <button>Test</button>
+    </React.Fragment>
+  );
+}
+```
 
 > NOTE!
 > For this code to work, you need to import React with import React from "react";. This is needed to let the build process know where it can find the <React.Fragment> component.
@@ -198,9 +370,48 @@ Instead of a <div> or <span>, you can also use a piece of built-in React markup:
 NOTE!
 For this code to work, you need to import React with import React from "react";. This is needed to let the build process know where it can find the <React.Fragment> component.
 
+`import React from "react";`
+
+`<React.Fragment>`
+
 As the built-in React markup can be long and unwieldy, you can also use the shorthand, <></>, which would look like this:
 
+`<></>`
+
+```
+import React from "react";
+
+export const MainView = () => {
+  return (
+    <>
+      <div>
+        <div>Eloquent JavaScript</div>
+        <div>Mastering JavaScript Functional Programming</div>
+        <div>JavaScript: The Good Parts</div>
+        <div>JavaScript: The Definitive Guide</div>
+        <div>The Road to React</div>
+      </div>
+      <button>Test</button>
+    </>
+  );
+}
+```
+
 Any of these methods will produce the same result. If you’re following along in CodeSandbox, feel free to try out the different methods to get a feel for how they look. Once finished, however, for the sake of the example, make sure you revert the code in your “main-view.jsx” file back to the following before moving on:
+
+```
+export const MainView = () => {
+  return (
+    <div>
+      <div>Eloquent JavaScript</div>
+      <div>Mastering JavaScript Functional Programming</div>
+      <div>JavaScript: The Good Parts</div>
+      <div>JavaScript: The Definitive Guide</div>
+      <div>The Road to React</div>
+    </div>
+  );
+}
+```
 
 JSX Syntax
 
@@ -208,45 +419,154 @@ JSX Syntax
 
 JSX is a special JavaScript syntax that lets you do more with JavaScript code. JSX looks a lot like HTML, and it can be transpiled by Babel into vanilla JavaScript code. You can see this for yourself using the Babel repl tool (paste something like <div>Hi</div> in the editor on the left-hand side). The key thing to remember about JSX is that a browser can’t understand it directly, hence the need for a compiler like Babel. This means there are two things you need Babel to compile for you: your ES6 code (e.g., your import and export statements), and your JSX code.
 
+`<div>Hi</div>`
+
+`import`
+
+`export`
+
 You can think of JSX code as if it’s regular HTML code, although there’s a few common guidelines to be aware of when adding it:
 
 Embedding Expressions: You can embed expressions (e.g., 1+1) and JavaScript variables into JSX code so long as you surround them in curly braces { and }, for example:
 
 **Embedding Expressions:**
 
+`1+1`
+
+`{`
+
+`}`
+
+```
+const MyComponent = () => {
+  let name = "John";
+  let num = 5;
+  let obj = {x: 32, y: 64};
+  return (
+    <div>
+      <p>Hello {name}!</p>
+      <p>{5 + num}</p>
+      <p>{Math.random()}</p>
+      <p>{obj.x}</p>
+    </div>
+  );
+}
+```
+
 Assigning Classes: You can assign classes to elements by adding them to the attribute className (as opposed to class). Say, for example, that you wanted to add the box and selected classes to a JSX element. You could do so like this:
 
 **Assigning Classes:**
 
+`className`
+
+`class`
+
+`box`
+
+`selected`
+
+```
+<div className="box selected">JSX is cool!</div>
+```
+
 Instead of via the regular HTML syntax:
+
+```
+<div class="box selected">JSX is cool!</div>
+```
 
 Nesting Elements: You can nest elements in JSX the same as you would in HTML. If an element doesn’t have any children, you can write it like this:
 
 **Nesting Elements:**
 
+```
+<div />
+```
+
 Rather than:
 
+```
+<div></div>
+```
+
 This is similar to how you’d write an <img> element in normal HTML.
+
+`<img>`
 
 Including Other Components: If you create a component called MainView, you can use it in your app by including the <MainView /> element in your code. You’ll explore this further in the upcoming sections, but for now, this is all you need to know to create a basic component.
 
 **Including Other Components:**
 
+`MainView`
+
+`<MainView />`
+
 ## Importing the MainView Component
+
+```
+MainView
+```
 
 As you’re already aware, src/index.html represents the entry point of your app. That’s why you supply it to the parcel command when you run it. The file contains the following code:
 
+`src/index.html`
+
+`parcel`
+
+```
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Your-App-Name</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="index.jsx"></script>
+  </body>
+</html>
+```
+
 Notice that this entry file also includes the index.jsx file (<script type="module" src="index.jsx"></script>), which means that src/index.jsx is the place where React code is bootstrapped. This is where you’ll import and use your MainView component.
+
+`index.jsx`
+
+`<script type="module" src="index.jsx"></script>`
+
+`src/index.jsx`
+
+`MainView`
 
 To import components into other JavaScript or JSX files, use the following syntax:
 
+```
+import { ComponentName } from '[path to the component file]';
+```
+
 For example, to import MainView (which exists in src/components/main-view/main-view.jsx) to src/index.html, the code would be:
+
+`MainView`
+
+`src/components/main-view/main-view.jsx`
+
+`src/index.html`
+
+```
+import { MainView } from './components/main-view/main-view';
+```
 
 > Keep in mind that the thing you’re trying to import must be exported first (which is the case with MainView), otherwise you’ll get an error.
 
 Keep in mind that the thing you’re trying to import must be exported first (which is the case with MainView), otherwise you’ll get an error.
 
+`MainView`
+
 The first ./ indicates that the path will start relative to the folder containing the file you add this line of code to—in this case the “src” folder. You don’t need to include the file extension when importing from JavaScript or JSX files in React; that’s why you won’t find .jsx after the filename main-view in the import statement.
+
+`./`
+
+`.jsx`
+
+`main-view`
 
 > NOTE
 > MainView must be enclosed in curly braces because it was exported using the “named export” method. The alternative would be the “default export” method, where the default keyword is added in main-view.jsx. If you want to learn more about when to use named export or default export, take a look at "[Named Export vs Default Export](https://medium.com/@etherealm/named-export-vs-default-export-in-es6-affb483a0910)"
@@ -254,13 +574,64 @@ The first ./ indicates that the path will start relative to the folder containin
 Note
 MainView must be enclosed in curly braces because it was exported using the “named export” method. The alternative would be the “default export” method, where the default keyword is added in main-view.jsx. If you want to learn more about when to use named export or default export, take a look at "Named Export vs Default Export"
 
+`MainView`
+
+`default`
+
+`main-view.jsx`
+
 Next, add the import statement to index.jsx, right after import { createRoot } from "react-dom/client";:
+
+`index.jsx`
+
+`import { createRoot } from "react-dom/client";`
+
+```
+import { createRoot } from "react-dom/client";
+
+import { MainView } from "./components/main-view/main-view";
+
+import "./index.scss";
+```
 
 Now that you’ve imported MainView into src/index.jsx, let’s use it! Go ahead and replace the UI returned by the App component:
 
+`MainView`
+
+`src/index.jsx`
+
+`App`
+
+```
+<div>
+  <h1>Hello React!</h1>
+</div>
+```
+
 With:
 
+```
+<MainView />
+```
+
 The final src/index.jsx code should look like this:
+
+`src/index.jsx`
+
+```
+import { createRoot } from "react-dom/client";
+import { MainView } from "./components/main-view/main-view";
+
+import "./index.scss";
+
+const App = () => {
+ return <MainView />;
+};
+
+const container = document.querySelector("#root");
+const root = createRoot(container);
+root.render(<App />);
+```
 
 > TIP!
 > As src/index.jsx is the file that contains the first React code to be executed, wouldn’t this make the App component created in it the “real” root component rather than MainView? Well, yes it does. However, the MainView component is where most of the UI coding will be. It’s better this way because src/index.jsx will only have one job, which is to bootstrap the React code and nothing else.
@@ -268,7 +639,23 @@ The final src/index.jsx code should look like this:
 TIP!
 As src/index.jsx is the file that contains the first React code to be executed, wouldn’t this make the App component created in it the “real” root component rather than MainView? Well, yes it does. However, the MainView component is where most of the UI coding will be. It’s better this way because src/index.jsx will only have one job, which is to bootstrap the React code and nothing else.
 
+`src/index.jsx`
+
+`App`
+
+`MainView`
+
+`MainView`
+
+`src/index.jsx`
+
 The short format has been used when adding MainView (<MainView />, as opposed to <MainView></MainView>), as there are no nested elements in it right now.
+
+`MainView`
+
+`<MainView />`
+
+`<MainView></MainView>`
 
 You should now see a list of JavaScript books in the preview window on the right-hand side.
 
@@ -278,6 +665,14 @@ You should now see a list of JavaScript books in the preview window on the right
 
 Throughout the rest of this Exercise, you’ll develop more components for your demo project. For example, each of the div elements in your MainView containing a book title will become a reusable “child” component of the parent MainView component. This “child” will be your reusable BookCard component. When a student clicks on the book card, a “BookView” will open (a subview of your main view), where they can see more details about the book.
 
+`div`
+
+`MainView`
+
+`MainView`
+
+`BookCard`
+
 > NOTE
 > The architecture of these components and how they’re connected is exactly like what you’ll need to build for your Achievement project, so working through the demo yourself will provide you with plenty of practice to prepare you for your project tasks!
 
@@ -286,9 +681,15 @@ The architecture of these components and how they’re connected is exactly like
 
 Before moving on to creating the BookCard component, let’s take a look at another important React concept: how data flows throughout a React app.
 
+`BookCard`
+
 # Component Data: State and Props
 
 So far, you’ve created a component that displays a static hardcoded piece of UI and a list of five books. The list can’t be dynamically changed or controlled in its current shape, but you don’t need to worry about that in this app. It would make sense to have a “books” array somewhere in the component that can be filled with data fetched from an API. So where should this books variable exist within the MainView component? Well, React is designed to have a component’s data reside in two places: the component’s state and props.
+
+`books`
+
+`MainView`
 
 **state**
 
@@ -306,11 +707,50 @@ When using React, the UI isn’t modified directly from the code. For instance, 
 
 You can create and initialize a new state for a component with useState, a special function provided by React. To demonstrate useState in action, let’s take a look at how you can use useState in MainView to store a list of books. The following is code that will replace some of the code you currently have in your main-view.jsx file (a breakdown of what’s changed is after the code).
 
+`useState`
+
+`useState`
+
+`useState`
+
+`MainView`
+
+`main-view.jsx`
+
+```
+import { useState } from "react";
+
+export const MainView = () => {
+  const [books, setBooks] = useState([]);
+
+  return (
+        // same code from before containing your book titles
+  );
+};
+```
+
 First, you call the useState() function (imported from React) with an empty array. This is the initial value of your books variable. The useState() function returns an array of paired values that you destructure (break down into variables) using the const [books, setBooks] syntax.
+
+`useState()`
+
+`books`
+
+`useState()`
 
 **destructure**
 
+`const [books, setBooks]`
+
 The statement const [books, setBooks] = useState([]); can technically be viewed as a shortened form of:
+
+`const [books, setBooks] = useState([]);`
+
+```
+let books = [];
+const setBooks = function(newBookList){
+  books = newBooksList;
+};
+```
 
 > TIP!
 > To learn more about array destructuring, check out the [MDN array destructuring documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#array_destructuring).
@@ -320,23 +760,85 @@ To learn more about array destructuring, check out the MDN array destructuring d
 
 This assigns the current state value to the books variable (what was initially given to useState()—in your case, an empty array). A method that updates the books variable is assigned to setBooks.
 
+`books`
+
+`useState()`
+
+`books`
+
+`setBooks`
+
 Currently, your state has been initialized with an empty list of books. The UI, then, will be based on what’s in the books state. If the list is empty, you’ll see nothing on the screen, because the map loop will be given an empty array. In this type of scenario, it’s useful to display a message like “The list is empty.”
 
+`books`
+
+`map`
+
 Let’s adjust the code with this in mind, to see how you can use MainView's state to control its UI:
+
+`MainView`
+
+```
+import { useState } from "react";
+
+export const MainView = () => {
+  const [books, setBooks] = useState([
+    { id: 1, title: "Eloquent JavaScript" },
+    { id: 2, title: "Mastering JavaScript Functional Programming" },
+    { id: 3, title: "JavaScript: The Good Parts" },
+    { id: 4, title: "JavaScript: The Definitive Guide" },
+    { id: 5, title: "The Road to React" }
+  ]);
+
+  if (books.length === 0) {
+    return <div>The list is empty!</div>;
+  }
+
+  return (
+    <div>
+      {books.map((book) => {
+        return <div>{book.title}</div>;
+      })}
+    </div>
+  );
+};
+```
 
 > The map() method in the code just shown maps each element in the books array to a piece of UI. So, after its execution, you have one <div>{book.title}</div> for each book. If you’re curious about the map() method, you can visit the [Array.prototype.map() JavaScript documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map).
 
 The map() method in the code just shown maps each element in the books array to a piece of UI. So, after its execution, you have one <div>{book.title}</div> for each book. If you’re curious about the map() method, you can visit the Array.prototype.map() JavaScript documentation.
 
+`map()`
+
+`<div>{book.title}</div>`
+
+`map()`
+
 Notice how the state’s value has been used in a conditional statement to calculate the UI of the MainView component. If the state of books is an empty array, the message “The list is empty” will be displayed (try putting back const [books, setBooks] = useState([]);); otherwise a list of books will be rendered.
+
+`MainView`
+
+`books`
+
+`const [books, setBooks] = useState([]);`
 
 This is just one example of calculating the UI based on its state. It doesn't need to have a bunch of if-else statements. At times, you may not care when the array is empty—or, you may want to display some special piece of UI when the array has only one book. Be creative! It’s up to you how you want to tie the state to your UI.
 
 To summarize, you started with a static list of books, which was hardcoded into the JSX. You then created a state variable, books, to manage the list of books, and moved the books’ definitions to the state variable. Doing this means the UI isn’t aware of where the data is coming from—its only concern is to render the UI from books. Setting it up this way will come in handy in the next Exercise, when you’ll update the code to fetch books from an API.
 
+`books`
+
+`books`
+
 ## key Attribute
 
+```
+key
+```
+
 Next, you need to add the key attribute. In a local build, your console will raise a warning with the code you have so far:
+
+`key`
 
 
 
@@ -344,7 +846,21 @@ Next, you need to add the key attribute. In a local build, your console will rai
 
 This warning is raised when you have a list of elements of the same type rendered next to each other (in this case, your book titles). This can be avoided by adding the key attribute to the element being rendered. The value of the key attribute must be guaranteed to be unique. For this activity, you can use the id property of each book as the value because each book has a unique id.
 
+`key`
+
+`key`
+
+`id`
+
+`id`
+
+```
+<div key={book.id}>{book.title}</div>
+```
+
 React wants you to do this because the key attribute helps it better distinguish between the similar elements in your list. As a result, it will be much easier for React to find the element that needs to be changed or removed from the DOM. This increased efficiency means your application will have better performance.
+
+`key`
 
 > CODE CHECK!
 > How’s your CodeSandbox looking? Check out Figure 7 to see where you might need to tweak your syntax if you’re encountering errors.
@@ -362,19 +878,100 @@ How’s your CodeSandbox looking? Check out Figure 7 to see where you might need
 
 In React, you often need to pass data from a component’s state to one of its child components. This can be done using props (more on this soon). In this section, you’ll be creating a child component called BookCard. This component will represent a single book in the books list displayed in MainView and can be reused to render as many BookCards as there are book titles. Each book is currently represented by a div element containing the book’s title. You’ll be replacing this div element with the new BookCard component.
 
+`BookCard`
+
+`MainView`
+
+`BookCard`
+
+`div`
+
+`div`
+
+`BookCard`
+
 The goals here are to learn how to pass data from a parent component (e.g., MainView) to a child component (e.g., BookCard) and to get a grasp on how to integrate a child component into the parent component.
+
+`MainView`
+
+`BookCard`
 
 Let’s get to it! Create a new folder called “book-card” inside the “components” folder, then create a file named book-card.jsx. Within that file, add the following code:
 
+`book-card.jsx`
+
+```
+export const BookCard = () => {
+  return <div>some title</div>;
+};
+```
+
 This code should be familiar to you. You’ve now created a BookCard component! However, it hasn't been put to use yet. So, let’s import it into the MainView component so that you can use it there. Add this import statement to MainView, somewhere after the existing import statements at the top:
+
+`BookCard`
+
+`MainView`
+
+`MainView`
+
+```
+import { BookCard } from "../book-card/book-card";
+```
 
 Voila! This is how you import one component into another. In this case, a child component (BookCard) into a parent component (MainView).
 
+`BookCard`
+
+`MainView`
+
 You’ll use the BookCard component in a similar way to how you used MainView in index.jsx. Now, replace <div key={book.id}>{book.title}</div> with <BookCard />.
+
+`BookCard`
+
+`MainView`
+
+`index.jsx`
+
+`<div key={book.id}>{book.title}</div>`
+
+`<BookCard />`
 
 The following is the updated MainView component, where the imported component BookCard is used:
 
+`MainView`
+
+`BookCard`
+
+```
+import { useState } from "react";
+import { BookCard } from "../book-card/book-card";
+
+export const MainView = () => {
+  const [books, setBooks] = useState([
+    { id: 1, title: "Eloquent JavaScript" },
+    { id: 2, title: "Mastering JavaScript Functional Programming" },
+    { id: 3, title: "JavaScript: The Good Parts" },
+    { id: 4, title: "JavaScript: The Definitive Guide" },
+    { id: 5, title: "The Road to React" }
+  ]);
+
+  if (books.length === 0) {
+    return <div>The list is empty!</div>;
+  }
+
+  return (
+    <div>
+      {books.map((book) => (
+        <BookCard />
+      ))}
+    </div>
+  );
+};
+```
+
 When running the code, you’ll notice that you don’t get the desired result. The “BookCard” text has been returned, rather than the unique book titles being mapped onto each BookCard component.
+
+`BookCard`
 
 
 
@@ -382,13 +979,57 @@ When running the code, you’ll notice that you don’t get the desired result. 
 
 To resolve this, you need to pass the book object from each iteration of the map() function to <BookCard />. This is done by adding a custom attribute before /> and setting its value to book. For example, book={book}:
 
+`book`
+
+`map()`
+
+`<BookCard />`
+
+`/>`
+
+`book`
+
+`book={book}`
+
+```
+{books.map((book) => (
+        <BookCard book={book} />
+      ))}
+```
+
 You don’t have to use the name book if you find it confusing to use the same name as the book object you’re passing as a value. It could, for example, be bookData={book} instead. This kind of attribute is special, as it’s how you can pass data to a child component. In React, this type of attribute is referred to as props.
+
+`book`
+
+`book`
+
+`bookData={book}`
 
 **props**
 
 Passing the data is only half the story, though. You still need to extract that data within the BookCard component in book-card.jsx so you can use it instead of the “some title” filler text. You can get the passed data by accessing the props argument:
 
+`BookCard`
+
+`book-card.jsx`
+
+`props`
+
+```
+export const BookCard = (props) => {
+  return <div>{props.book.title}</div>;
+};
+```
+
 It’s also very common to destructure the props argument so that its properties can be accessed directly:
+
+`props`
+
+```
+export const BookCard = ({ book }) => {
+  return <div>{book.title}</div>;
+};
+```
 
 > TIP! DESTRUCTURING OBJECTS
 > So, what’s going on here? The props object is being destructured.
@@ -403,9 +1044,30 @@ It’s also very common to destructure the props argument so that its properties
 Tip! Destructuring Objects
 So, what’s going on here? The props object is being destructured.
 
+`props`
+
+```
+export const BookCard = (props) => {
+   const { book } = props;
+   return <div>{book.title}</div>;
+}
+```
+
 As this is new to you, you may want to take a moment to review the documentation on object destructuring.
 
 Something you need to be aware of is the fact that book in props.book.title or in the destructured version { book } is the name of the prop used in <BookCard … />. If you had bookData as the prop name, you’d use props.bookData.title.
+
+`book`
+
+`props.book.title`
+
+`{ book }`
+
+`<BookCard … />`
+
+`bookData`
+
+`props.bookData.title`
 
 
 
@@ -413,11 +1075,29 @@ Something you need to be aware of is the fact that book in props.book.title or i
 
 In the destructured version, you’d use { bookData }. For this, reference bookData.title to access the book's title.
 
+`{ bookData }`
+
+`bookData.title`
+
 
 
 ![Destructured example for prop name bookData](https://images.careerfoundry.com/public/courses/fullstack-immersion/A3/3.3/bookData-prop-destructured.png)
 
 Keep in mind that this is true assuming that the prop that got passed from MainView is also named bookData for both cases:
+
+`MainView`
+
+`bookData`
+
+```
+return (
+  <div>
+    {books.map((book) => (
+      <BookCard key={book.id} bookData={book}/>
+    ))}
+  </div>
+);
+```
 
 > NOTE
 > Moving forward in this Exercise, it’s best to keep all prop names as book so that you can better follow along with the upcoming instructions. It will be assumed that the prop name is book from now onwards.
@@ -425,7 +1105,15 @@ Keep in mind that this is true assuming that the prop that got passed from MainV
 Note
 Moving forward in this Exercise, it’s best to keep all prop names as book so that you can better follow along with the upcoming instructions. It will be assumed that the prop name is book from now onwards.
 
+`book`
+
+`book`
+
 Now, you should get the same output as before, only this time using a custom child component BookCard. On the surface, it might not seem all that practical—after all, you did all this to get the exact same result as before. While it may have been simpler without using a custom component, this wouldn’t be the case if the child component were more complex than a singular div element. Throwing everything directly into the main component would quickly get messy!
+
+`BookCard`
+
+`div`
 
 The advantage of having granular components doesn’t stop there. Having the UI consist of granular components makes it easier for you to reuse these smaller components in different parts of your UI.
 
@@ -434,6 +1122,12 @@ To recap, the most basic way components communicate with each other is via props
 # Handling Events
 
 The next step will be to create a new component that will allow users to see more details about each book. To that end, you’ll practice adding a click event listener to <BookCard /> rendered inside MainView. When the card is clicked, this new component (BookView) will display more details about a single book.
+
+`<BookCard />`
+
+`MainView`
+
+`BookView`
 
 Click for sound
   @keyframes VOLUME_SMALL_WAVE_FLASH {
@@ -473,96 +1167,156 @@ Click for sound
           }
         }
       
-      #wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset{font-size:14px;}
-#wistia_chrome_65 #wistia_grid_80_wrapper div.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_65 #wistia_grid_80_wrapper span.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_65 #wistia_grid_80_wrapper ul.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_65 #wistia_grid_80_wrapper li.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_65 #wistia_grid_80_wrapper label.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_65 #wistia_grid_80_wrapper fieldset.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_65 #wistia_grid_80_wrapper button.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_65 #wistia_grid_80_wrapper img.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_65 #wistia_grid_80_wrapper a.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_65 #wistia_grid_80_wrapper svg.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_65 #wistia_grid_80_wrapper p.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_65 #wistia_grid_80_wrapper a.w-css-reset{border:0;}
-#wistia_chrome_65 #wistia_grid_80_wrapper h1.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:2em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_65 #wistia_grid_80_wrapper h2.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.5em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_65 #wistia_grid_80_wrapper h3.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.17em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_65 #wistia_grid_80_wrapper p.w-css-reset{margin:1.4em 0;}
-#wistia_chrome_65 #wistia_grid_80_wrapper a.w-css-reset{display:inline;}
-#wistia_chrome_65 #wistia_grid_80_wrapper span.w-css-reset{display:inline;}
-#wistia_chrome_65 #wistia_grid_80_wrapper svg.w-css-reset{display:inline;}
-#wistia_chrome_65 #wistia_grid_80_wrapper ul.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
-#wistia_chrome_65 #wistia_grid_80_wrapper ol.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
-#wistia_chrome_65 #wistia_grid_80_wrapper li.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
-#wistia_chrome_65 #wistia_grid_80_wrapper ul:before.w-css-reset{display:none}
-#wistia_chrome_65 #wistia_grid_80_wrapper ol:before.w-css-reset{display:none}
-#wistia_chrome_65 #wistia_grid_80_wrapper li:before.w-css-reset{display:none}
-#wistia_chrome_65 #wistia_grid_80_wrapper ul:after.w-css-reset{display:none}
-#wistia_chrome_65 #wistia_grid_80_wrapper ol:after.w-css-reset{display:none}
-#wistia_chrome_65 #wistia_grid_80_wrapper li:after.w-css-reset{display:none}
-#wistia_chrome_65 #wistia_grid_80_wrapper label.w-css-reset{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;float:none;outline:none}
-#wistia_chrome_65 #wistia_grid_80_wrapper button.w-css-reset{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;border:0;border-radius:0;outline:none;position:static}
-#wistia_chrome_65 #wistia_grid_80_wrapper img.w-css-reset{border:0;display:inline-block;vertical-align:top;border-radius:0;outline:none;position:static}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset button::-moz-focus-inner{border: 0;}
-      #wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree {font-size:14px;}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree div{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree span{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree ul{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree li{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree label{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree fieldset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree button{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree img{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree a{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree svg{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree p{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree a{border:0;}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree h1{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:2em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree h2{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.5em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree h3{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.17em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree p{margin:1.4em 0;}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree a{display:inline;}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree span{display:inline;}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree svg{display:inline;}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree ul{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree ol{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree li{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree ul:before{display:none}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree ol:before{display:none}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree li:before{display:none}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree ul:after{display:none}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree ol:after{display:none}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree li:after{display:none}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree label{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;float:none;outline:none}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree button{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;border:0;border-radius:0;outline:none;position:static}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree img{border:0;display:inline-block;vertical-align:top;border-radius:0;outline:none;position:static}
-#wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-tree  button::-moz-focus-inner{border: 0;}
-      #wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-max-width-none-important{max-width:none!important}
-      #wistia_chrome_65 #wistia_grid_80_wrapper .w-css-reset-button-important{border-radius:0!important;color:#fff!important;}
-    #wistia_grid_80_wrapper{-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;font-family:Arial,sans-serif;font-size:14px;height:100%;position:relative;text-align:left;width:100%;}
-#wistia_grid_80_wrapper *{-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}
-#wistia_grid_80_above{position:relative;}
-#wistia_grid_80_main{display:block;height:100%;position:relative;}
-#wistia_grid_80_behind{height:100%;left:0;position:absolute;top:0;width:100%;}
-#wistia_grid_80_center{height:100%;overflow:hidden;position:relative;width:100%;}
-#wistia_grid_80_front{display:none;height:100%;left:0;position:absolute;top:0;width:100%;}
-#wistia_grid_80_top_inside{position:absolute;left:0;top:0;width:100%;}
-#wistia_grid_80_top{width:100%;position:absolute;bottom:0;left:0;}
-#wistia_grid_80_bottom_inside{position:absolute;left:0;bottom:0;width:100%;}
-#wistia_grid_80_bottom{width:100%;position:absolute;top:0;left:0;}
-#wistia_grid_80_left_inside{height:100%;position:absolute;left:0;top:0;}
-#wistia_grid_80_left{height:100%;position:absolute;right:0;top:0;}
-#wistia_grid_80_right_inside{height:100%;right:0;position:absolute;top:0;}
-#wistia_grid_80_right{height:100%;left:0;position:absolute;top:0;}
-#wistia_grid_80_below{position:relative;}
+      #wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset{font-size:14px;}
+#wistia_chrome_23 #wistia_grid_146_wrapper div.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_23 #wistia_grid_146_wrapper span.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_23 #wistia_grid_146_wrapper ul.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_23 #wistia_grid_146_wrapper li.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_23 #wistia_grid_146_wrapper label.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_23 #wistia_grid_146_wrapper fieldset.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_23 #wistia_grid_146_wrapper button.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_23 #wistia_grid_146_wrapper img.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_23 #wistia_grid_146_wrapper a.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_23 #wistia_grid_146_wrapper svg.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_23 #wistia_grid_146_wrapper p.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_23 #wistia_grid_146_wrapper a.w-css-reset{border:0;}
+#wistia_chrome_23 #wistia_grid_146_wrapper h1.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:2em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_23 #wistia_grid_146_wrapper h2.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.5em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_23 #wistia_grid_146_wrapper h3.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.17em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_23 #wistia_grid_146_wrapper p.w-css-reset{margin:1.4em 0;}
+#wistia_chrome_23 #wistia_grid_146_wrapper a.w-css-reset{display:inline;}
+#wistia_chrome_23 #wistia_grid_146_wrapper span.w-css-reset{display:inline;}
+#wistia_chrome_23 #wistia_grid_146_wrapper svg.w-css-reset{display:inline;}
+#wistia_chrome_23 #wistia_grid_146_wrapper ul.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
+#wistia_chrome_23 #wistia_grid_146_wrapper ol.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
+#wistia_chrome_23 #wistia_grid_146_wrapper li.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
+#wistia_chrome_23 #wistia_grid_146_wrapper ul:before.w-css-reset{display:none}
+#wistia_chrome_23 #wistia_grid_146_wrapper ol:before.w-css-reset{display:none}
+#wistia_chrome_23 #wistia_grid_146_wrapper li:before.w-css-reset{display:none}
+#wistia_chrome_23 #wistia_grid_146_wrapper ul:after.w-css-reset{display:none}
+#wistia_chrome_23 #wistia_grid_146_wrapper ol:after.w-css-reset{display:none}
+#wistia_chrome_23 #wistia_grid_146_wrapper li:after.w-css-reset{display:none}
+#wistia_chrome_23 #wistia_grid_146_wrapper label.w-css-reset{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;float:none;outline:none}
+#wistia_chrome_23 #wistia_grid_146_wrapper button.w-css-reset{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;border:0;border-radius:0;outline:none;position:static}
+#wistia_chrome_23 #wistia_grid_146_wrapper img.w-css-reset{border:0;display:inline-block;vertical-align:top;border-radius:0;outline:none;position:static}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset button::-moz-focus-inner{border: 0;}
+      #wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree {font-size:14px;}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree div{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree span{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree ul{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree li{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree label{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree fieldset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree button{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree img{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree a{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree svg{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree p{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree a{border:0;}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree h1{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:2em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree h2{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.5em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree h3{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.17em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree p{margin:1.4em 0;}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree a{display:inline;}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree span{display:inline;}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree svg{display:inline;}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree ul{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree ol{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree li{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree ul:before{display:none}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree ol:before{display:none}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree li:before{display:none}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree ul:after{display:none}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree ol:after{display:none}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree li:after{display:none}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree label{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;float:none;outline:none}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree button{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;border:0;border-radius:0;outline:none;position:static}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree img{border:0;display:inline-block;vertical-align:top;border-radius:0;outline:none;position:static}
+#wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-tree  button::-moz-focus-inner{border: 0;}
+      #wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-max-width-none-important{max-width:none!important}
+      #wistia_chrome_23 #wistia_grid_146_wrapper .w-css-reset-button-important{border-radius:0!important;color:#fff!important;}
+    #wistia_grid_146_wrapper{-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;font-family:Arial,sans-serif;font-size:14px;height:100%;position:relative;text-align:left;width:100%;}
+#wistia_grid_146_wrapper *{-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}
+#wistia_grid_146_above{position:relative;}
+#wistia_grid_146_main{display:block;height:100%;position:relative;}
+#wistia_grid_146_behind{height:100%;left:0;position:absolute;top:0;width:100%;}
+#wistia_grid_146_center{height:100%;overflow:hidden;position:relative;width:100%;}
+#wistia_grid_146_front{display:none;height:100%;left:0;position:absolute;top:0;width:100%;}
+#wistia_grid_146_top_inside{position:absolute;left:0;top:0;width:100%;}
+#wistia_grid_146_top{width:100%;position:absolute;bottom:0;left:0;}
+#wistia_grid_146_bottom_inside{position:absolute;left:0;bottom:0;width:100%;}
+#wistia_grid_146_bottom{width:100%;position:absolute;top:0;left:0;}
+#wistia_grid_146_left_inside{height:100%;position:absolute;left:0;top:0;}
+#wistia_grid_146_left{height:100%;position:absolute;right:0;top:0;}
+#wistia_grid_146_right_inside{height:100%;right:0;position:absolute;top:0;}
+#wistia_grid_146_right{height:100%;left:0;position:absolute;top:0;}
+#wistia_grid_146_below{position:relative;}
 
 More data about each book needs to be available, so that more details are rendered in the BookView once each BookCard is clicked on. So, let’s update the array of books in MainView to include the image and the author of each book:
 
+`BookView`
+
+`BookCard`
+
+`MainView`
+
+```
+const [books, setBooks] = useState([
+    {
+      id: 1,
+      title: "Eloquent JavaScript",
+      image:
+        "https://images-na.ssl-images-amazon.com/images/I/51InjRPaF7L._SX377_BO1,204,203,200_.jpg",
+      author: "Marijn Haverbeke"
+    },
+    {
+      id: 2,
+      title: "Mastering JavaScript Functional Programming",
+      image:
+        "https://images-na.ssl-images-amazon.com/images/I/51WAikRq37L._SX218_BO1,204,203,200_QL40_FMwebp_.jpg",
+      author: "Federico Kereki"
+    },
+    {
+      id: 3,
+      title: "JavaScript: The Good Parts",
+      image:
+        "https://images-na.ssl-images-amazon.com/images/I/5131OWtQRaL._SX381_BO1,204,203,200_.jpg",
+      author: "Douglas Crockford"
+    },
+    {
+      id: 4,
+      title: "JavaScript: The Definitive Guide",
+      image:
+        "https://images-na.ssl-images-amazon.com/images/I/51HbNW6RzhL._SX218_BO1,204,203,200_QL40_FMwebp_.jpg",
+      author: "David Flanagan"
+    },
+    {
+      id: 5,
+      title: "The Road to React",
+      image:
+        "https://images-na.ssl-images-amazon.com/images/I/41MBLi5a4jL._SX384_BO1,204,203,200_.jpg",
+      author: "Robin Wieruch"
+    }
+  ]);
+```
+
 You’ll notice that this new information isn’t immediately rendered in MainView, because so far your code specifies that you only want the book title rendered on each book card.
 
+`MainView`
+
 Now, let’s create our BookView component to display this new information. Create a new folder called “book-view” in your “components” folder, and create a book-view.jsx file within this folder. In this new file, add the code necessary to create a component that expects a prop (in the example code, it will be named book). The prop represents the book object, which will be passed in MainView once you import and use the new component there. The component will render whatever properties in the book object are passed as a prop.
+
+`BookView`
+
+`book-view.jsx`
+
+`book`
+
+`book`
+
+`MainView`
+
+`book`
 
 
 
@@ -570,23 +1324,178 @@ Now, let’s create our BookView component to display this new information. Crea
 
 Try to create the component with these specifications before reviewing the following code snippets. Does your book-view.jsx file code look like the following code?
 
+`book-view.jsx`
+
+```
+export const BookView = ({ book }) => {
+  return (
+    <div>
+      <div>
+        <img src={book.image} />
+      </div>
+      <div>
+        <span>Title: </span>
+        <span>{book.title}</span>
+      </div>
+      <div>
+        <span>Author: </span>
+        <span>{book.author}</span>
+      </div>
+    </div>
+  );
+};
+```
+
 By this point, you should have created the component and imported it into MainView (if not, try it now). Now, you need to implement the following logic:
+
+`MainView`
 
 - When clicking a book card, the app should display the clicked book’s details instead of the “book-card” list that’s already displayed.
 
 However, you also need a way to identify whether there was a user click or not. This can be emulated by adding a new state variable into MainView’s state object. Let’s call it selectedBook:
 
+`MainView`
+
+`selectedBook`
+
+```
+const [selectedBook, setSelectedBook] = useState(null);
+```
+
 The initial value of selectedBook state is going to be null. This tells the app that no book cards were clicked. However, if a user were to click on a book card you would need to update the selectedBook state to refer to the book object that was clicked, thus inducing the app to render that book’s details. This process reflects a key principle that you came across earlier this Exercise: in React, the UI is the function of its state.
+
+`selectedBook`
+
+`null`
+
+`selectedBook`
 
 To determine whether to render a specific part of the UI (BookView) in the MainView component, you’ll add a new state (selectedBook) as a flag, as shown in the following code (this is what MainView should look like):
 
+`BookView`
+
+`MainView`
+
+`selectedBook`
+
+`MainView`
+
+```
+import { useState } from "react";
+import { BookCard } from "../book-card/book-card";
+import { BookView } from "../book-view/book-view";
+
+export const MainView = () => {
+  const [books, setBooks] = useState([
+    {
+      id: 1,
+      title: "Eloquent JavaScript",
+      image:
+        "https://images-na.ssl-images-amazon.com/images/I/51InjRPaF7L._SX377_BO1,204,203,200_.jpg",
+      author: "Marijn Haverbeke"
+    },
+    {
+      id: 2,
+      title: "Mastering JavaScript Functional Programming",
+      image:
+        "https://images-na.ssl-images-amazon.com/images/I/51WAikRq37L._SX218_BO1,204,203,200_QL40_FMwebp_.jpg",
+      author: "Federico Kereki"
+    },
+    {
+      id: 3,
+      title: "JavaScript: The Good Parts",
+      image:
+        "https://images-na.ssl-images-amazon.com/images/I/5131OWtQRaL._SX381_BO1,204,203,200_.jpg",
+      author: "Douglas Crockford"
+    },
+    {
+      id: 4,
+      title: "JavaScript: The Definitive Guide",
+      image:
+        "https://images-na.ssl-images-amazon.com/images/I/51HbNW6RzhL._SX218_BO1,204,203,200_QL40_FMwebp_.jpg",
+      author: "David Flanagan"
+    },
+    {
+      id: 5,
+      title: "The Road to React",
+      image:
+        "https://images-na.ssl-images-amazon.com/images/I/41MBLi5a4jL._SX384_BO1,204,203,200_.jpg",
+      author: "Robin Wieruch"
+    }
+  ]);
+
+  const [selectedBook, setSelectedBook] = useState(null);
+
+  if (selectedBook) {
+    return <BookView book={selectedBook} />;
+  }
+
+  if (books.length === 0) {
+    return <div>The list is empty!</div>;
+  }
+
+  return (
+    <div>
+      {books.map((book) => (
+        <BookCard key={book.id} book={book} />
+      ))}
+    </div>
+  );
+};
+```
+
 Adding selectedBook as a flag is similar to how the books state is used to determine when to render the list of books or a text message. The code examples that have been provided hopefully give you an idea of how you should think when designing applications in React.
 
+`selectedBook`
+
+`books`
+
 Now, if you click on any book card, nothing happens. selectedBook will always have null value, so the BookView associated with the clicked book will never be rendered (because if (selectedBook) will be evaluated as false as long as selectedBook’s value is null). This is due to the fact that it hasn’t listened for user clicks.
+
+`selectedBook`
+
+`null`
+
+`BookView`
+
+`if (selectedBook)`
+
+`selectedBook`
+
+`null`
 
 ## Listening for Click Events in React
 
 Listening for click events in React can be done by using a special attribute: onClick. This attribute accepts a function, and this function will be the callback function once the element is clicked. You can see this in the following code, specifically with the newly added <button onClick={() => {alert('Nice!')}}>Click me!</button> element that’s been included in your existing return statement:
+
+`onClick`
+
+`<button onClick={() => {alert('Nice!')}}>Click me!</button>`
+
+`return`
+
+```
+export const MainView = () => {
+
+  // same code
+
+
+  return (
+    <div>
+      <button
+        onClick={() => {
+          alert("Nice!");
+        }}
+      >
+        Click me!
+      </button>
+      {books.map((book) => (
+        <BookCard key={book.id} book={book} />
+      ))}
+    </div>
+  );
+}
+```
 
 Testing this code should give you the expected result—that is, a new button reading “Click me!”. When clicked, an alert message containing “Nice!” will appear.
 
@@ -628,94 +1537,126 @@ Click for sound
           }
         }
       
-      #wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset{font-size:14px;}
-#wistia_chrome_68 #wistia_grid_104_wrapper div.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_68 #wistia_grid_104_wrapper span.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_68 #wistia_grid_104_wrapper ul.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_68 #wistia_grid_104_wrapper li.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_68 #wistia_grid_104_wrapper label.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_68 #wistia_grid_104_wrapper fieldset.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_68 #wistia_grid_104_wrapper button.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_68 #wistia_grid_104_wrapper img.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_68 #wistia_grid_104_wrapper a.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_68 #wistia_grid_104_wrapper svg.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_68 #wistia_grid_104_wrapper p.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_68 #wistia_grid_104_wrapper a.w-css-reset{border:0;}
-#wistia_chrome_68 #wistia_grid_104_wrapper h1.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:2em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_68 #wistia_grid_104_wrapper h2.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.5em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_68 #wistia_grid_104_wrapper h3.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.17em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_68 #wistia_grid_104_wrapper p.w-css-reset{margin:1.4em 0;}
-#wistia_chrome_68 #wistia_grid_104_wrapper a.w-css-reset{display:inline;}
-#wistia_chrome_68 #wistia_grid_104_wrapper span.w-css-reset{display:inline;}
-#wistia_chrome_68 #wistia_grid_104_wrapper svg.w-css-reset{display:inline;}
-#wistia_chrome_68 #wistia_grid_104_wrapper ul.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
-#wistia_chrome_68 #wistia_grid_104_wrapper ol.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
-#wistia_chrome_68 #wistia_grid_104_wrapper li.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
-#wistia_chrome_68 #wistia_grid_104_wrapper ul:before.w-css-reset{display:none}
-#wistia_chrome_68 #wistia_grid_104_wrapper ol:before.w-css-reset{display:none}
-#wistia_chrome_68 #wistia_grid_104_wrapper li:before.w-css-reset{display:none}
-#wistia_chrome_68 #wistia_grid_104_wrapper ul:after.w-css-reset{display:none}
-#wistia_chrome_68 #wistia_grid_104_wrapper ol:after.w-css-reset{display:none}
-#wistia_chrome_68 #wistia_grid_104_wrapper li:after.w-css-reset{display:none}
-#wistia_chrome_68 #wistia_grid_104_wrapper label.w-css-reset{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;float:none;outline:none}
-#wistia_chrome_68 #wistia_grid_104_wrapper button.w-css-reset{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;border:0;border-radius:0;outline:none;position:static}
-#wistia_chrome_68 #wistia_grid_104_wrapper img.w-css-reset{border:0;display:inline-block;vertical-align:top;border-radius:0;outline:none;position:static}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset button::-moz-focus-inner{border: 0;}
-      #wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree {font-size:14px;}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree div{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree span{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree ul{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree li{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree label{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree fieldset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree button{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree img{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree a{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree svg{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree p{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree a{border:0;}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree h1{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:2em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree h2{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.5em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree h3{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.17em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree p{margin:1.4em 0;}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree a{display:inline;}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree span{display:inline;}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree svg{display:inline;}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree ul{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree ol{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree li{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree ul:before{display:none}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree ol:before{display:none}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree li:before{display:none}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree ul:after{display:none}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree ol:after{display:none}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree li:after{display:none}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree label{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;float:none;outline:none}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree button{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;border:0;border-radius:0;outline:none;position:static}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree img{border:0;display:inline-block;vertical-align:top;border-radius:0;outline:none;position:static}
-#wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-tree  button::-moz-focus-inner{border: 0;}
-      #wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-max-width-none-important{max-width:none!important}
-      #wistia_chrome_68 #wistia_grid_104_wrapper .w-css-reset-button-important{border-radius:0!important;color:#fff!important;}
-    #wistia_grid_104_wrapper{-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;font-family:Arial,sans-serif;font-size:14px;height:100%;position:relative;text-align:left;width:100%;}
-#wistia_grid_104_wrapper *{-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}
-#wistia_grid_104_above{position:relative;}
-#wistia_grid_104_main{display:block;height:100%;position:relative;}
-#wistia_grid_104_behind{height:100%;left:0;position:absolute;top:0;width:100%;}
-#wistia_grid_104_center{height:100%;overflow:hidden;position:relative;width:100%;}
-#wistia_grid_104_front{display:none;height:100%;left:0;position:absolute;top:0;width:100%;}
-#wistia_grid_104_top_inside{position:absolute;left:0;top:0;width:100%;}
-#wistia_grid_104_top{width:100%;position:absolute;bottom:0;left:0;}
-#wistia_grid_104_bottom_inside{position:absolute;left:0;bottom:0;width:100%;}
-#wistia_grid_104_bottom{width:100%;position:absolute;top:0;left:0;}
-#wistia_grid_104_left_inside{height:100%;position:absolute;left:0;top:0;}
-#wistia_grid_104_left{height:100%;position:absolute;right:0;top:0;}
-#wistia_grid_104_right_inside{height:100%;right:0;position:absolute;top:0;}
-#wistia_grid_104_right{height:100%;left:0;position:absolute;top:0;}
-#wistia_grid_104_below{position:relative;}
+      #wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset{font-size:14px;}
+#wistia_chrome_26 #wistia_grid_124_wrapper div.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_26 #wistia_grid_124_wrapper span.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_26 #wistia_grid_124_wrapper ul.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_26 #wistia_grid_124_wrapper li.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_26 #wistia_grid_124_wrapper label.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_26 #wistia_grid_124_wrapper fieldset.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_26 #wistia_grid_124_wrapper button.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_26 #wistia_grid_124_wrapper img.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_26 #wistia_grid_124_wrapper a.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_26 #wistia_grid_124_wrapper svg.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_26 #wistia_grid_124_wrapper p.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_26 #wistia_grid_124_wrapper a.w-css-reset{border:0;}
+#wistia_chrome_26 #wistia_grid_124_wrapper h1.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:2em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_26 #wistia_grid_124_wrapper h2.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.5em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_26 #wistia_grid_124_wrapper h3.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.17em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_26 #wistia_grid_124_wrapper p.w-css-reset{margin:1.4em 0;}
+#wistia_chrome_26 #wistia_grid_124_wrapper a.w-css-reset{display:inline;}
+#wistia_chrome_26 #wistia_grid_124_wrapper span.w-css-reset{display:inline;}
+#wistia_chrome_26 #wistia_grid_124_wrapper svg.w-css-reset{display:inline;}
+#wistia_chrome_26 #wistia_grid_124_wrapper ul.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
+#wistia_chrome_26 #wistia_grid_124_wrapper ol.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
+#wistia_chrome_26 #wistia_grid_124_wrapper li.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
+#wistia_chrome_26 #wistia_grid_124_wrapper ul:before.w-css-reset{display:none}
+#wistia_chrome_26 #wistia_grid_124_wrapper ol:before.w-css-reset{display:none}
+#wistia_chrome_26 #wistia_grid_124_wrapper li:before.w-css-reset{display:none}
+#wistia_chrome_26 #wistia_grid_124_wrapper ul:after.w-css-reset{display:none}
+#wistia_chrome_26 #wistia_grid_124_wrapper ol:after.w-css-reset{display:none}
+#wistia_chrome_26 #wistia_grid_124_wrapper li:after.w-css-reset{display:none}
+#wistia_chrome_26 #wistia_grid_124_wrapper label.w-css-reset{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;float:none;outline:none}
+#wistia_chrome_26 #wistia_grid_124_wrapper button.w-css-reset{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;border:0;border-radius:0;outline:none;position:static}
+#wistia_chrome_26 #wistia_grid_124_wrapper img.w-css-reset{border:0;display:inline-block;vertical-align:top;border-radius:0;outline:none;position:static}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset button::-moz-focus-inner{border: 0;}
+      #wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree {font-size:14px;}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree div{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree span{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree ul{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree li{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree label{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree fieldset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree button{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree img{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree a{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree svg{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree p{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree a{border:0;}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree h1{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:2em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree h2{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.5em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree h3{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.17em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree p{margin:1.4em 0;}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree a{display:inline;}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree span{display:inline;}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree svg{display:inline;}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree ul{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree ol{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree li{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree ul:before{display:none}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree ol:before{display:none}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree li:before{display:none}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree ul:after{display:none}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree ol:after{display:none}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree li:after{display:none}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree label{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;float:none;outline:none}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree button{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;border:0;border-radius:0;outline:none;position:static}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree img{border:0;display:inline-block;vertical-align:top;border-radius:0;outline:none;position:static}
+#wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-tree  button::-moz-focus-inner{border: 0;}
+      #wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-max-width-none-important{max-width:none!important}
+      #wistia_chrome_26 #wistia_grid_124_wrapper .w-css-reset-button-important{border-radius:0!important;color:#fff!important;}
+    #wistia_grid_124_wrapper{-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;font-family:Arial,sans-serif;font-size:14px;height:100%;position:relative;text-align:left;width:100%;}
+#wistia_grid_124_wrapper *{-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}
+#wistia_grid_124_above{position:relative;}
+#wistia_grid_124_main{display:block;height:100%;position:relative;}
+#wistia_grid_124_behind{height:100%;left:0;position:absolute;top:0;width:100%;}
+#wistia_grid_124_center{height:100%;overflow:hidden;position:relative;width:100%;}
+#wistia_grid_124_front{display:none;height:100%;left:0;position:absolute;top:0;width:100%;}
+#wistia_grid_124_top_inside{position:absolute;left:0;top:0;width:100%;}
+#wistia_grid_124_top{width:100%;position:absolute;bottom:0;left:0;}
+#wistia_grid_124_bottom_inside{position:absolute;left:0;bottom:0;width:100%;}
+#wistia_grid_124_bottom{width:100%;position:absolute;top:0;left:0;}
+#wistia_grid_124_left_inside{height:100%;position:absolute;left:0;top:0;}
+#wistia_grid_124_left{height:100%;position:absolute;right:0;top:0;}
+#wistia_grid_124_right_inside{height:100%;right:0;position:absolute;top:0;}
+#wistia_grid_124_right{height:100%;left:0;position:absolute;top:0;}
+#wistia_grid_124_below{position:relative;}
 
 To sum up, pass a callback function to the onClick attribute, as this function contains the logic you want to be executed whenever a click is registered.
 
+`onClick`
+
 It seems straightforward, doesn’t it? Based on what you’ve learned so far, all you need to do is change the selectedBook state when you click BookCard, right? Let’s test this idea. First, delete the button to clean up the code a little bit, then update the BookCard usage in MainView:
+
+`selectedBook`
+
+`BookCard`
+
+`BookCard`
+
+`MainView`
+
+```
+export const MainView = () => {
+
+  // same code
+
+
+  return (
+    <div>
+      {books.map((book) => (
+        <BookCard
+          key={book.id}
+          book={book}
+          onClick={() => {
+            setSelectedBook(book);
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+```
 
 > NOTE
 > setSelectedBook() is the setter function that was created in the line const [selectedBook, setSelectedBook] = useState(null);.
@@ -728,26 +1669,154 @@ Note
 setSelectedBook() is the setter function that was created in the line const [selectedBook, setSelectedBook] = useState(null);.
 Remember, useState creates two things:
 
+`setSelectedBook()`
+
+`const [selectedBook, setSelectedBook] = useState(null);`
+
+`useState`
+
 - A state initialized with whatever passed to useState();
 - A function that allows you to change the value of this state if you decide to do so later on.
 
+```
+useState()
+```
+
 When testing the app, it seems that nothing’s happening when clicking any of the book cards. That’s because there’s a problem that needs to be overcome: the onClick event attribute only works as an event listener with React elements (i.e., JSX elements), but not with components. Elements in this case means regular divs, buttons, p’s, and so on.
+
+`onClick`
 
 If onClick were to be added to a component (e.g., <BookCard onClick={() => {...}}/>), React would interpret it as a prop (yes, you can pass functions as props). This means that you need a way to add onClick={() => { setSelectedBook(book); }} to the div element in BookCard’s render method (in place of the note “[WE NEED TO ADD onClick HERE]” in the following code):
 
+`onClick`
+
+`<BookCard onClick={() => {...}}/>`
+
+`onClick={() => { setSelectedBook(book); }}`
+
+`div`
+
+`BookCard`
+
+```
+export const BookCard = ({ book }) => {
+  return <div [WE NEED TO ADD onClick HERE]>{book.title}</div>;
+};
+```
+
 However, you can’t just do it like this:
+
+```
+export const BookCard = ({ book }) => {
+  return (
+    <div
+      onClick={() => {
+        setSelectedBook(book);
+      }}
+    >
+      {book.title}
+    </div>
+  );
+};
+```
 
 Why not? Because BookCard has no idea what setSelectedBook is. Also, in React, the only component that can directly change a state is the component that owns that state, in this case, MainView. No worries, there’s a two-step solution:
 
+`BookCard`
+
+`setSelectedBook`
+
+`MainView`
+
+```
+MainView
+```
+
+```
+<BookCard />
+```
+
+```
+setSelectedBook(book)
+```
+
+```
+setSelectedBook
+```
+
+```
+MainView
+```
+
+```
+MainView
+```
+
+```
+BookCard
+```
+
+```
+onClick
+```
+
 Let’s go through the first step. The easiest way to pass functions as props is to pass an arrow function that includes the logic inside it. For example:
+
+```
+<BookCard
+          key={book.id}
+          book={book}
+          onBookClick={(newSelectedBook) => {
+            setSelectedBook(newSelectedBook);
+          }}
+        />
+```
 
 Here, you’ve passed a function as a prop called onBookClick. It has a function with one parameter that represents the book to be set to selectedBook state.
 
+`onBookClick`
+
+`selectedBook`
+
 As for the second step, open the book-card.jsx file and make sure that you extract the onBookClick prop using object destructuring, just like you did with the book (or bookData) prop in there. Then, use it in the callback function for the onClick event listener:
+
+`book-card.jsx`
+
+`onBookClick`
+
+`book`
+
+`bookData`
+
+`onClick`
+
+```
+export const BookCard = ({ book, onBookClick }) => {
+  return (
+    <div
+      onClick={() => {
+        onBookClick(book);
+      }}
+    >
+      {book.title}
+    </div>
+  );
+};
+```
 
 Again, you passed a callback function to onClick, then added the logic (onBookClick(book);) that you need to execute once a click event is registered. Note that book passed to onBookClick(...); is the prop you extracted earlier.
 
+`onClick`
+
+`onBookClick(book);`
+
+`book`
+
+`onBookClick(...);`
+
 Now everything should work as expected. Clicking any given book card should open a book view (BookView) with the book’s details displayed inside it.
+
+`BookView`
 
 Click for sound
   @keyframes VOLUME_SMALL_WAVE_FLASH {
@@ -787,108 +1856,191 @@ Click for sound
           }
         }
       
-      #wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset{font-size:14px;}
-#wistia_chrome_71 #wistia_grid_152_wrapper div.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_71 #wistia_grid_152_wrapper span.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_71 #wistia_grid_152_wrapper ul.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_71 #wistia_grid_152_wrapper li.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_71 #wistia_grid_152_wrapper label.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_71 #wistia_grid_152_wrapper fieldset.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_71 #wistia_grid_152_wrapper button.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_71 #wistia_grid_152_wrapper img.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_71 #wistia_grid_152_wrapper a.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_71 #wistia_grid_152_wrapper svg.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_71 #wistia_grid_152_wrapper p.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_71 #wistia_grid_152_wrapper a.w-css-reset{border:0;}
-#wistia_chrome_71 #wistia_grid_152_wrapper h1.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:2em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_71 #wistia_grid_152_wrapper h2.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.5em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_71 #wistia_grid_152_wrapper h3.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.17em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_71 #wistia_grid_152_wrapper p.w-css-reset{margin:1.4em 0;}
-#wistia_chrome_71 #wistia_grid_152_wrapper a.w-css-reset{display:inline;}
-#wistia_chrome_71 #wistia_grid_152_wrapper span.w-css-reset{display:inline;}
-#wistia_chrome_71 #wistia_grid_152_wrapper svg.w-css-reset{display:inline;}
-#wistia_chrome_71 #wistia_grid_152_wrapper ul.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
-#wistia_chrome_71 #wistia_grid_152_wrapper ol.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
-#wistia_chrome_71 #wistia_grid_152_wrapper li.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
-#wistia_chrome_71 #wistia_grid_152_wrapper ul:before.w-css-reset{display:none}
-#wistia_chrome_71 #wistia_grid_152_wrapper ol:before.w-css-reset{display:none}
-#wistia_chrome_71 #wistia_grid_152_wrapper li:before.w-css-reset{display:none}
-#wistia_chrome_71 #wistia_grid_152_wrapper ul:after.w-css-reset{display:none}
-#wistia_chrome_71 #wistia_grid_152_wrapper ol:after.w-css-reset{display:none}
-#wistia_chrome_71 #wistia_grid_152_wrapper li:after.w-css-reset{display:none}
-#wistia_chrome_71 #wistia_grid_152_wrapper label.w-css-reset{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;float:none;outline:none}
-#wistia_chrome_71 #wistia_grid_152_wrapper button.w-css-reset{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;border:0;border-radius:0;outline:none;position:static}
-#wistia_chrome_71 #wistia_grid_152_wrapper img.w-css-reset{border:0;display:inline-block;vertical-align:top;border-radius:0;outline:none;position:static}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset button::-moz-focus-inner{border: 0;}
-      #wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree {font-size:14px;}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree div{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree span{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree ul{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree li{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree label{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree fieldset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree button{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree img{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree a{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree svg{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree p{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree a{border:0;}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree h1{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:2em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree h2{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.5em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree h3{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.17em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree p{margin:1.4em 0;}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree a{display:inline;}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree span{display:inline;}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree svg{display:inline;}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree ul{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree ol{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree li{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree ul:before{display:none}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree ol:before{display:none}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree li:before{display:none}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree ul:after{display:none}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree ol:after{display:none}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree li:after{display:none}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree label{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;float:none;outline:none}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree button{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;border:0;border-radius:0;outline:none;position:static}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree img{border:0;display:inline-block;vertical-align:top;border-radius:0;outline:none;position:static}
-#wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-tree  button::-moz-focus-inner{border: 0;}
-      #wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-max-width-none-important{max-width:none!important}
-      #wistia_chrome_71 #wistia_grid_152_wrapper .w-css-reset-button-important{border-radius:0!important;color:#fff!important;}
-    #wistia_grid_152_wrapper{-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;font-family:Arial,sans-serif;font-size:14px;height:100%;position:relative;text-align:left;width:100%;}
-#wistia_grid_152_wrapper *{-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}
-#wistia_grid_152_above{position:relative;}
-#wistia_grid_152_main{display:block;height:100%;position:relative;}
-#wistia_grid_152_behind{height:100%;left:0;position:absolute;top:0;width:100%;}
-#wistia_grid_152_center{height:100%;overflow:hidden;position:relative;width:100%;}
-#wistia_grid_152_front{display:none;height:100%;left:0;position:absolute;top:0;width:100%;}
-#wistia_grid_152_top_inside{position:absolute;left:0;top:0;width:100%;}
-#wistia_grid_152_top{width:100%;position:absolute;bottom:0;left:0;}
-#wistia_grid_152_bottom_inside{position:absolute;left:0;bottom:0;width:100%;}
-#wistia_grid_152_bottom{width:100%;position:absolute;top:0;left:0;}
-#wistia_grid_152_left_inside{height:100%;position:absolute;left:0;top:0;}
-#wistia_grid_152_left{height:100%;position:absolute;right:0;top:0;}
-#wistia_grid_152_right_inside{height:100%;right:0;position:absolute;top:0;}
-#wistia_grid_152_right{height:100%;left:0;position:absolute;top:0;}
-#wistia_grid_152_below{position:relative;}
+      #wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset{font-size:14px;}
+#wistia_chrome_29 #wistia_grid_102_wrapper div.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_29 #wistia_grid_102_wrapper span.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_29 #wistia_grid_102_wrapper ul.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_29 #wistia_grid_102_wrapper li.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_29 #wistia_grid_102_wrapper label.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_29 #wistia_grid_102_wrapper fieldset.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_29 #wistia_grid_102_wrapper button.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_29 #wistia_grid_102_wrapper img.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_29 #wistia_grid_102_wrapper a.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_29 #wistia_grid_102_wrapper svg.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_29 #wistia_grid_102_wrapper p.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_29 #wistia_grid_102_wrapper a.w-css-reset{border:0;}
+#wistia_chrome_29 #wistia_grid_102_wrapper h1.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:2em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_29 #wistia_grid_102_wrapper h2.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.5em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_29 #wistia_grid_102_wrapper h3.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.17em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_29 #wistia_grid_102_wrapper p.w-css-reset{margin:1.4em 0;}
+#wistia_chrome_29 #wistia_grid_102_wrapper a.w-css-reset{display:inline;}
+#wistia_chrome_29 #wistia_grid_102_wrapper span.w-css-reset{display:inline;}
+#wistia_chrome_29 #wistia_grid_102_wrapper svg.w-css-reset{display:inline;}
+#wistia_chrome_29 #wistia_grid_102_wrapper ul.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
+#wistia_chrome_29 #wistia_grid_102_wrapper ol.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
+#wistia_chrome_29 #wistia_grid_102_wrapper li.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
+#wistia_chrome_29 #wistia_grid_102_wrapper ul:before.w-css-reset{display:none}
+#wistia_chrome_29 #wistia_grid_102_wrapper ol:before.w-css-reset{display:none}
+#wistia_chrome_29 #wistia_grid_102_wrapper li:before.w-css-reset{display:none}
+#wistia_chrome_29 #wistia_grid_102_wrapper ul:after.w-css-reset{display:none}
+#wistia_chrome_29 #wistia_grid_102_wrapper ol:after.w-css-reset{display:none}
+#wistia_chrome_29 #wistia_grid_102_wrapper li:after.w-css-reset{display:none}
+#wistia_chrome_29 #wistia_grid_102_wrapper label.w-css-reset{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;float:none;outline:none}
+#wistia_chrome_29 #wistia_grid_102_wrapper button.w-css-reset{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;border:0;border-radius:0;outline:none;position:static}
+#wistia_chrome_29 #wistia_grid_102_wrapper img.w-css-reset{border:0;display:inline-block;vertical-align:top;border-radius:0;outline:none;position:static}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset button::-moz-focus-inner{border: 0;}
+      #wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree {font-size:14px;}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree div{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree span{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree ul{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree li{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree label{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree fieldset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree button{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree img{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree a{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree svg{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree p{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree a{border:0;}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree h1{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:2em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree h2{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.5em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree h3{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.17em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree p{margin:1.4em 0;}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree a{display:inline;}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree span{display:inline;}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree svg{display:inline;}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree ul{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree ol{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree li{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree ul:before{display:none}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree ol:before{display:none}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree li:before{display:none}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree ul:after{display:none}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree ol:after{display:none}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree li:after{display:none}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree label{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;float:none;outline:none}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree button{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;border:0;border-radius:0;outline:none;position:static}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree img{border:0;display:inline-block;vertical-align:top;border-radius:0;outline:none;position:static}
+#wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-tree  button::-moz-focus-inner{border: 0;}
+      #wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-max-width-none-important{max-width:none!important}
+      #wistia_chrome_29 #wistia_grid_102_wrapper .w-css-reset-button-important{border-radius:0!important;color:#fff!important;}
+    #wistia_grid_102_wrapper{-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;font-family:Arial,sans-serif;font-size:14px;height:100%;position:relative;text-align:left;width:100%;}
+#wistia_grid_102_wrapper *{-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}
+#wistia_grid_102_above{position:relative;}
+#wistia_grid_102_main{display:block;height:100%;position:relative;}
+#wistia_grid_102_behind{height:100%;left:0;position:absolute;top:0;width:100%;}
+#wistia_grid_102_center{height:100%;overflow:hidden;position:relative;width:100%;}
+#wistia_grid_102_front{display:none;height:100%;left:0;position:absolute;top:0;width:100%;}
+#wistia_grid_102_top_inside{position:absolute;left:0;top:0;width:100%;}
+#wistia_grid_102_top{width:100%;position:absolute;bottom:0;left:0;}
+#wistia_grid_102_bottom_inside{position:absolute;left:0;bottom:0;width:100%;}
+#wistia_grid_102_bottom{width:100%;position:absolute;top:0;left:0;}
+#wistia_grid_102_left_inside{height:100%;position:absolute;left:0;top:0;}
+#wistia_grid_102_left{height:100%;position:absolute;right:0;top:0;}
+#wistia_grid_102_right_inside{height:100%;right:0;position:absolute;top:0;}
+#wistia_grid_102_right{height:100%;left:0;position:absolute;top:0;}
+#wistia_grid_102_below{position:relative;}
 
 ## Adding a “Back” Button to BookView
+
+```
+BookView
+```
 
 When opening a book view, the only way to get back to the main view is to refresh the app (or in this case, CodeSandbox), which is tedious and impractical. Remember, your app is an SPA, so pressing the browser’s built-in back button will open whatever website was displayed before running your client app, not the previous “view.” So, let’s work on a solution that draws on your existing knowledge. Let’s add a <button></button> to book-view.jsx to navigate back to the app’s main view.
 
 **back**
 
+`<button></button>`
+
+`book-view.jsx`
+
+```
+export const BookView = ({ book }) => {
+  return (
+    <div>
+      <div>
+        <img src={book.image} />
+      </div>
+      <div>
+        <span>Title: </span>
+        <span>{book.title}</span>
+      </div>
+      <div>
+        <span>Author: </span>
+        <span>{book.author}</span>
+      </div>
+      <button>Back</button>
+    </div>
+  );
+};
+```
+
 Terrific! You have a button. Now, you need to add a new prop to BookView that will be used to notify MainView that the back button was clicked:
+
+`BookView`
+
+`MainView`
 
 **back**
 
+```
+export const BookView = ({ book, onBackClick }) => {
+```
+
 And also call the function prop onBackClick when the button click occurs:
+
+`onBackClick`
+
+```
+<button onClick={onBackClick}>Back</button>
+```
 
 Notice that this time you’re not creating an arrow function that calls onBackClick like before with onBookClick—this is a shortened version that works because onClick takes a function and it so happens that onBackClick is a function itself.
 
+`onBackClick`
+
+`onBookClick`
+
+`onClick`
+
+`onBackClick`
+
 Finally, let’s add the onBackClick logic in MainView that sets selectedBook back to its initial state value, null. In main-view.jsx, go ahead and update the code, so that <BookView …/> is rendered to look like this:
 
+`onBackClick`
+
+`MainView`
+
+`selectedBook`
+
+`null`
+
+`main-view.jsx`
+
+`<BookView …/>`
+
+```
+if (selectedBook) {
+    return (
+      <BookView book={selectedBook} onBackClick={() => setSelectedBook(null)} />
+    );
+  }
+```
+
 That should do the trick for now. As you can see, you’ve made use of the fact that assigning null to the selectedBook state will allow MainView to stop rendering <BookView … />. The reason for this is the conditional if (selectedBook) will return false, and thus skip returning <BookView … />.
+
+`null`
+
+`selectedBook`
+
+`MainView`
+
+`<BookView … />`
+
+`if (selectedBook)`
+
+`<BookView … />`
 
 Click for sound
   @keyframes VOLUME_SMALL_WAVE_FLASH {
@@ -928,90 +2080,90 @@ Click for sound
           }
         }
       
-      #wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset{font-size:14px;}
-#wistia_chrome_74 #wistia_grid_128_wrapper div.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_74 #wistia_grid_128_wrapper span.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_74 #wistia_grid_128_wrapper ul.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_74 #wistia_grid_128_wrapper li.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_74 #wistia_grid_128_wrapper label.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_74 #wistia_grid_128_wrapper fieldset.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_74 #wistia_grid_128_wrapper button.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_74 #wistia_grid_128_wrapper img.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_74 #wistia_grid_128_wrapper a.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_74 #wistia_grid_128_wrapper svg.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_74 #wistia_grid_128_wrapper p.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_74 #wistia_grid_128_wrapper a.w-css-reset{border:0;}
-#wistia_chrome_74 #wistia_grid_128_wrapper h1.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:2em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_74 #wistia_grid_128_wrapper h2.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.5em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_74 #wistia_grid_128_wrapper h3.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.17em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_74 #wistia_grid_128_wrapper p.w-css-reset{margin:1.4em 0;}
-#wistia_chrome_74 #wistia_grid_128_wrapper a.w-css-reset{display:inline;}
-#wistia_chrome_74 #wistia_grid_128_wrapper span.w-css-reset{display:inline;}
-#wistia_chrome_74 #wistia_grid_128_wrapper svg.w-css-reset{display:inline;}
-#wistia_chrome_74 #wistia_grid_128_wrapper ul.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
-#wistia_chrome_74 #wistia_grid_128_wrapper ol.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
-#wistia_chrome_74 #wistia_grid_128_wrapper li.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
-#wistia_chrome_74 #wistia_grid_128_wrapper ul:before.w-css-reset{display:none}
-#wistia_chrome_74 #wistia_grid_128_wrapper ol:before.w-css-reset{display:none}
-#wistia_chrome_74 #wistia_grid_128_wrapper li:before.w-css-reset{display:none}
-#wistia_chrome_74 #wistia_grid_128_wrapper ul:after.w-css-reset{display:none}
-#wistia_chrome_74 #wistia_grid_128_wrapper ol:after.w-css-reset{display:none}
-#wistia_chrome_74 #wistia_grid_128_wrapper li:after.w-css-reset{display:none}
-#wistia_chrome_74 #wistia_grid_128_wrapper label.w-css-reset{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;float:none;outline:none}
-#wistia_chrome_74 #wistia_grid_128_wrapper button.w-css-reset{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;border:0;border-radius:0;outline:none;position:static}
-#wistia_chrome_74 #wistia_grid_128_wrapper img.w-css-reset{border:0;display:inline-block;vertical-align:top;border-radius:0;outline:none;position:static}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset button::-moz-focus-inner{border: 0;}
-      #wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree {font-size:14px;}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree div{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree span{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree ul{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree li{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree label{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree fieldset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree button{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree img{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree a{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree svg{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree p{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree a{border:0;}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree h1{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:2em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree h2{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.5em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree h3{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.17em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree p{margin:1.4em 0;}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree a{display:inline;}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree span{display:inline;}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree svg{display:inline;}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree ul{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree ol{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree li{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree ul:before{display:none}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree ol:before{display:none}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree li:before{display:none}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree ul:after{display:none}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree ol:after{display:none}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree li:after{display:none}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree label{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;float:none;outline:none}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree button{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;border:0;border-radius:0;outline:none;position:static}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree img{border:0;display:inline-block;vertical-align:top;border-radius:0;outline:none;position:static}
-#wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-tree  button::-moz-focus-inner{border: 0;}
-      #wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-max-width-none-important{max-width:none!important}
-      #wistia_chrome_74 #wistia_grid_128_wrapper .w-css-reset-button-important{border-radius:0!important;color:#fff!important;}
-    #wistia_grid_128_wrapper{-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;font-family:Arial,sans-serif;font-size:14px;height:100%;position:relative;text-align:left;width:100%;}
-#wistia_grid_128_wrapper *{-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}
-#wistia_grid_128_above{position:relative;}
-#wistia_grid_128_main{display:block;height:100%;position:relative;}
-#wistia_grid_128_behind{height:100%;left:0;position:absolute;top:0;width:100%;}
-#wistia_grid_128_center{height:100%;overflow:hidden;position:relative;width:100%;}
-#wistia_grid_128_front{display:none;height:100%;left:0;position:absolute;top:0;width:100%;}
-#wistia_grid_128_top_inside{position:absolute;left:0;top:0;width:100%;}
-#wistia_grid_128_top{width:100%;position:absolute;bottom:0;left:0;}
-#wistia_grid_128_bottom_inside{position:absolute;left:0;bottom:0;width:100%;}
-#wistia_grid_128_bottom{width:100%;position:absolute;top:0;left:0;}
-#wistia_grid_128_left_inside{height:100%;position:absolute;left:0;top:0;}
-#wistia_grid_128_left{height:100%;position:absolute;right:0;top:0;}
-#wistia_grid_128_right_inside{height:100%;right:0;position:absolute;top:0;}
-#wistia_grid_128_right{height:100%;left:0;position:absolute;top:0;}
-#wistia_grid_128_below{position:relative;}
+      #wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset{font-size:14px;}
+#wistia_chrome_32 #wistia_grid_80_wrapper div.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_32 #wistia_grid_80_wrapper span.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_32 #wistia_grid_80_wrapper ul.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_32 #wistia_grid_80_wrapper li.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_32 #wistia_grid_80_wrapper label.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_32 #wistia_grid_80_wrapper fieldset.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_32 #wistia_grid_80_wrapper button.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_32 #wistia_grid_80_wrapper img.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_32 #wistia_grid_80_wrapper a.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_32 #wistia_grid_80_wrapper svg.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_32 #wistia_grid_80_wrapper p.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_32 #wistia_grid_80_wrapper a.w-css-reset{border:0;}
+#wistia_chrome_32 #wistia_grid_80_wrapper h1.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:2em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_32 #wistia_grid_80_wrapper h2.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.5em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_32 #wistia_grid_80_wrapper h3.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.17em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_32 #wistia_grid_80_wrapper p.w-css-reset{margin:1.4em 0;}
+#wistia_chrome_32 #wistia_grid_80_wrapper a.w-css-reset{display:inline;}
+#wistia_chrome_32 #wistia_grid_80_wrapper span.w-css-reset{display:inline;}
+#wistia_chrome_32 #wistia_grid_80_wrapper svg.w-css-reset{display:inline;}
+#wistia_chrome_32 #wistia_grid_80_wrapper ul.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
+#wistia_chrome_32 #wistia_grid_80_wrapper ol.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
+#wistia_chrome_32 #wistia_grid_80_wrapper li.w-css-reset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
+#wistia_chrome_32 #wistia_grid_80_wrapper ul:before.w-css-reset{display:none}
+#wistia_chrome_32 #wistia_grid_80_wrapper ol:before.w-css-reset{display:none}
+#wistia_chrome_32 #wistia_grid_80_wrapper li:before.w-css-reset{display:none}
+#wistia_chrome_32 #wistia_grid_80_wrapper ul:after.w-css-reset{display:none}
+#wistia_chrome_32 #wistia_grid_80_wrapper ol:after.w-css-reset{display:none}
+#wistia_chrome_32 #wistia_grid_80_wrapper li:after.w-css-reset{display:none}
+#wistia_chrome_32 #wistia_grid_80_wrapper label.w-css-reset{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;float:none;outline:none}
+#wistia_chrome_32 #wistia_grid_80_wrapper button.w-css-reset{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;border:0;border-radius:0;outline:none;position:static}
+#wistia_chrome_32 #wistia_grid_80_wrapper img.w-css-reset{border:0;display:inline-block;vertical-align:top;border-radius:0;outline:none;position:static}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset button::-moz-focus-inner{border: 0;}
+      #wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree {font-size:14px;}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree div{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree span{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree ul{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree li{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree label{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree fieldset{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree button{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree img{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree a{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree svg{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree p{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree a{border:0;}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree h1{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:2em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree h2{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.5em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree h3{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:1.17em;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree p{margin:1.4em 0;}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree a{display:inline;}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree span{display:inline;}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree svg{display:inline;}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree ul{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree ol{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree li{box-sizing:inherit;box-shadow:none;color:inherit;display:block;float:none;font:inherit;font-family:inherit;font-style:normal;font-weight:normal;font-size:inherit;letter-spacing:0;line-height:inherit;margin:0;max-height:none;max-width:none;min-height:0;min-width:0;padding:0;position:static;text-decoration:none;text-transform:none;text-shadow:none;transition:none;word-wrap:normal;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;-webkit-font-smoothing:antialiased;list-style-type:none}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree ul:before{display:none}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree ol:before{display:none}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree li:before{display:none}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree ul:after{display:none}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree ol:after{display:none}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree li:after{display:none}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree label{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;float:none;outline:none}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree button{background-attachment:scroll;background-color:transparent;background-image:none;background-position:0 0;background-repeat:no-repeat;background-size:100% 100%;border:0;border-radius:0;outline:none;position:static}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree img{border:0;display:inline-block;vertical-align:top;border-radius:0;outline:none;position:static}
+#wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-tree  button::-moz-focus-inner{border: 0;}
+      #wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-max-width-none-important{max-width:none!important}
+      #wistia_chrome_32 #wistia_grid_80_wrapper .w-css-reset-button-important{border-radius:0!important;color:#fff!important;}
+    #wistia_grid_80_wrapper{-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;font-family:Arial,sans-serif;font-size:14px;height:100%;position:relative;text-align:left;width:100%;}
+#wistia_grid_80_wrapper *{-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}
+#wistia_grid_80_above{position:relative;}
+#wistia_grid_80_main{display:block;height:100%;position:relative;}
+#wistia_grid_80_behind{height:100%;left:0;position:absolute;top:0;width:100%;}
+#wistia_grid_80_center{height:100%;overflow:hidden;position:relative;width:100%;}
+#wistia_grid_80_front{display:none;height:100%;left:0;position:absolute;top:0;width:100%;}
+#wistia_grid_80_top_inside{position:absolute;left:0;top:0;width:100%;}
+#wistia_grid_80_top{width:100%;position:absolute;bottom:0;left:0;}
+#wistia_grid_80_bottom_inside{position:absolute;left:0;bottom:0;width:100%;}
+#wistia_grid_80_bottom{width:100%;position:absolute;top:0;left:0;}
+#wistia_grid_80_left_inside{height:100%;position:absolute;left:0;top:0;}
+#wistia_grid_80_left{height:100%;position:absolute;right:0;top:0;}
+#wistia_grid_80_right_inside{height:100%;right:0;position:absolute;top:0;}
+#wistia_grid_80_right{height:100%;left:0;position:absolute;top:0;}
+#wistia_grid_80_below{position:relative;}
 
 > CODE CHECK!
 > You can take a look at the complete CodeSandbox for this Exercise here.
@@ -1031,13 +2183,35 @@ Before wrapping up, let’s take a look at another React feature: the virtual DO
 
 It’s been a while since you worked with the DOM, so let’s consider what this means in practice. Traditionally, you’d manually update the DOM based on your data (or you’d ask your chosen framework or library to do so). For a list of books, you'd tell the browser to render as many <div>s as there are books. If a new book were added or an existing one modified, you’d either re-render the DOM entirely (removing all the current <div>s and adding new ones based on the new list of books) or find the <div>s that need to be modified and change them.
 
+`<div>`
+
+`<div>`
+
+`<div>`
+
 Let’s take a look at how React’s virtual DOM changes this process (at this point, don’t focus too much on how to render something using a React app). For the sake of this example, let’s assume you’ve written an app that returns two <div>s, and then passes them to React to be rendered.
+
+`<div>`
 
 In the following code, you can see the initial DOM returned by your app:
 
+```
+<div>Hello</div>
+
+<div>How are you?</div>
+```
+
 Now, let’s say there’s a change, and your app returns this:
 
+```
+<div>Good morning</div>
+
+<div>How are you?</div>
+```
+
 React will update only the first <div> element, changing “Hello” to “Good morning,” thus minimizing the amount of changes to the real DOM. React takes care of updating what’s relevant: you tell it what the new DOM should look like and React compares it with the existing DOM. Once React’s determined the changes that need to be made—a process known as “diffing”—it then applies them.
+
+`<div>`
 
 A virtual DOM leads to significant performance improvements, as updating the entire DOM in the browser is inefficient and slow, whereas re-rendering the virtual DOM means updating only those elements that have changed.
 
@@ -1046,6 +2220,14 @@ A virtual DOM leads to significant performance improvements, as updating the ent
 Congratulations! This Exercise was a lot to take in. You took an in-depth look at React, starting with SPAs and the best way to set up your folder structure. This was followed by a closer look at some of React’s key features—notably components, state, props, JSX, and (much later) the virtual DOM—to help you better understand their implications for an SPA such as your myFlix app.
 
 Throughout the Exercise, you put what you learned into practice, developing your first React components for the (demo) app rendering book information for JavaScript students. The app consisted of a main view (MainView), which rendered a list of clickable BookCard components displaying the titles of different books. Clicking the BookCard components opened a new BookView, which displayed further book details. To wrap things up, you implemented a Back button so that your users could return to the main view. Well done!
+
+`MainView`
+
+`BookCard`
+
+`BookCard`
+
+`BookView`
 
 **Back**
 
@@ -1075,6 +2257,12 @@ Take the quiz to test your knowledge on this Exercise.
 
 In this task, you’ll create the MainView, MovieCard, and MovieView components for your myFlix app. You’ll create these components using JSX.
 
+`MainView`
+
+`MovieCard`
+
+`MovieView`
+
 The following animation shows what your app’s functionality should look like after completing the task. To help determine what information to include in each component and view for your myFlix SPA, refer to your Achievement 3 project brief and the wireframes provided.
 
 
@@ -1087,15 +2275,49 @@ The following animation shows what your app’s functionality should look like a
 Note
 For now, you’ll be adding your own mock data, but in the next Exercise you’ll be integrating your API from Achievement 2. So, when coming up with the mock data, make sure it matches the sort of data that will eventually be fed to your React components from your API. Depending on what data you stored in your database, you may have different props for MovieCard and MovieView.
 
+`MovieCard`
+
+`MovieView`
+
 Directions
 
 **Directions**
+
+```
+MovieCard
+```
+
+```
+MainView
+```
+
+```
+MovieCard
+```
+
+```
+MovieView
+```
+
+```
+MovieView
+```
+
+```
+MainView
+```
+
+```
+MovieCard
+```
 
 Bonus Task
 
 **Bonus Task**
 
 In this Exercise, you briefly learned that there are different ways to export components using ES6 syntax. You were shown how to use the named export method; but the alternative is default export. It’s worth learning about this alternative, as you’re likely to encounter its syntax as you continue your journey into the world of React. As a bonus task, try refactoring your code to export your main view using the default method.
+
+`default`
 
 To do so:
 
@@ -1107,13 +2329,41 @@ Step 2. In main-view.jsx, move the export keyword to a separate line, and add de
 
 **Step 2.**
 
+`main-view.jsx`
+
+`default`
+
+```
+const MainView = () => {
+ return (
+   <div>
+     <div>Eloquent JavaScript</div>
+     <div>Mastering JavaScript Functional Programming</div>
+     <div>JavaScript: The Good Parts</div>
+     <div>JavaScript: The Definitive Guide</div>
+     <div>The Road to React</div>
+   </div>
+ );
+ };
+
+ export default MainView;
+```
+
 Step 3. Remove the curly braces around MainView in your import statement in your index.jsx file.
 
 **Step 3.**
 
+`MainView`
+
+`index.jsx`
+
 import MainView from './components/main-view/main-view';
 
+`import MainView from './components/main-view/main-view';`
+
 Be careful! While you’re allowed to export as many objects, variables, and components as you like from a single file, you can export only one item using the default keyword, so make sure you choose wisely. If you want to learn more about when to use named export or default export, take a look at "Named Export vs Default Export."
+
+`default`
 
 Rubric
 
@@ -1155,6 +2405,10 @@ Check out recently submitted work by other students to get an idea of what’s r
 - 
 - 
 - 
+
+```
+`code`
+```
 
 
 Evaluate with AI Evaluate
