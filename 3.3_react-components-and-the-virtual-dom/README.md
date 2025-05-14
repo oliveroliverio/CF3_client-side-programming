@@ -124,6 +124,7 @@ const root = createRoot(container);
 root.render(<App />);
 
 ```
+Fix permissions: `sudo chown -R $USER:$(id -gn) ~/.npm`
 
 After creating these files run `npm install` in the root dir.
 
