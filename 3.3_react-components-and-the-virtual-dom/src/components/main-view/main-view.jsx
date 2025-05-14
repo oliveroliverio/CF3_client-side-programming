@@ -8,6 +8,7 @@ export const MainView = () => {
             <div>JavaScript: The Good Parts</div>
             <div>JavaScript: The Definitive Guide</div>
             <div>The Road to React</div>
+            <button>test</button>
         </div>
     );
 };
