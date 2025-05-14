@@ -1,9 +1,10 @@
 import React from 'react';
+import { MainView } from './components/main-view/main-view';
 
 function App() {
     return (
         <div>
-            <h1>Welcome to React</h1>
+            <MainView />
         </div>
     );
 }
