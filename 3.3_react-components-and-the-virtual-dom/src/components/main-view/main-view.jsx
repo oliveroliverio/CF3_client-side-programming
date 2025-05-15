@@ -44,6 +44,13 @@ export const MainView = () => {
     ]);
     return (
         <>
+            <button
+                onClick={() => {
+                    alert("Nice!");
+                }}
+            >
+                Click me!
+            </button>
             {books.map((book) => (
                 <BookCard key={book.id} bookData={book} />
             ))}
