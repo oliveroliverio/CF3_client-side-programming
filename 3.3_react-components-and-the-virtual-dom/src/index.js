@@ -1,7 +1,9 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
-import App from './App';
+import ReactDOM from 'react-dom';
+import { MainView } from './components/main-view/main-view';
 
-const container = document.getElementById('root');
-const root = createRoot(container);
-root.render(<App />);
+const App = () => {
+    return <MainView />;
+};
+
+ReactDOM.render(<App />, document.getElementById('root'));
