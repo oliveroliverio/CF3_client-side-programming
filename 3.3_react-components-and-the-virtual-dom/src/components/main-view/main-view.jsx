@@ -1,10 +1,9 @@
-import React from 'react'
-import { useState } from 'react';
-import { MovieCard } from '../movie-card/movie-card';
+import React, { useState } from 'react';
+import MovieCard from '../movie-card/movie-card';
+import MovieView from '../movie-view/movie-view';
 
-
-
-export const MainView = () => {
+const MainView = () => {
+    const [selectedMovie, setSelectedMovie] = useState(null);
     const [movies, setMovies] = useState([
         {
             id: 1,
@@ -42,20 +41,25 @@ export const MainView = () => {
             description: "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption."
         }
     ]);
-    return (
-        <>
 
-            {
-                movies.map((movie) => (
-                    <MovieCard key={movie.id}
+    if (selectedMovie) {
+        return <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />;
+    }
+
+    return (
+        <div className="main-view">
+            <h1>myFlix Movies</h1>
+            <div className="movies-grid">
+                {movies.map((movie) => (
+                    <MovieCard
+                        key={movie.id}
                         movieData={movie}
-                        onMovieClick={(newSelectedMovie) => {
-                            setSelectedMovie(newSelectedMovie)
-                        }}
+                        onMovieClick={setSelectedMovie}
                     />
-                ))
-            }
-            < button > test</button >
-        </>
+                ))}
+            </div>
+        </div>
     );
 };
+
+export default MainView;

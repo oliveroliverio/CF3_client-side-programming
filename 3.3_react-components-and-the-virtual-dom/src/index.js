@@ -1,9 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { MainView } from './components/main-view/main-view';
+import { createRoot } from 'react-dom/client';
+import MainView from './components/main-view/main-view';
+import './index.css';
 
-const App = () => {
-    return <MainView />;
-};
+// Get the root element from the HTML document
+const container = document.getElementById('root');
+const root = createRoot(container);
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// Render the MainView component in the root element
+root.render(<MainView />);

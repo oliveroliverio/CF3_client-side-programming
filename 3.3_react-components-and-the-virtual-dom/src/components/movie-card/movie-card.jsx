@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const MovieCard = ({ movieData, onMovieClick }) => {
+const MovieCard = ({ movieData, onMovieClick }) => {
   return (
     <div 
       className="movie-card"
@@ -12,8 +12,9 @@ export const MovieCard = ({ movieData, onMovieClick }) => {
       <div className="movie-info">
         <h3>{movieData.title}</h3>
         <p>Director: {movieData.director}</p>
-        <p>{movieData.description}</p>
       </div>
     </div>
   );
 };
+
+export default MovieCard;
