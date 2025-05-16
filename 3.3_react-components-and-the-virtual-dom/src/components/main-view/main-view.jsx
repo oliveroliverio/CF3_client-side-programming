@@ -1,45 +1,45 @@
 import React from 'react'
 import { useState } from 'react';
-import { BookCard } from '../book-card/book-card';
+import { MovieCard } from '../movie-card/movie-card';
 
 
 
 export const MainView = () => {
-    const [books, setBooks] = useState([
+    const [movies, setMovies] = useState([
         {
             id: 1,
-            title: "Eloquent JavaScript",
-            image:
-                "https://images-na.ssl-images-amazon.com/images/I/51InjRPaF7L._SX377_BO1,204,203,200_.jpg",
-            author: "Marijn Haverbeke"
+            title: "Inception",
+            image: "https://www.movieposters.com/cdn/shop/products/20664117398ad7301d9a9af6d2e5aa5c_480x.progressive.jpg",
+            director: "Christopher Nolan",
+            description: "A thief who steals corporate secrets through dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O."
         },
         {
             id: 2,
-            title: "Mastering JavaScript Functional Programming",
-            image:
-                "https://images-na.ssl-images-amazon.com/images/I/51WAikRq37L._SX218_BO1,204,203,200_QL40_FMwebp_.jpg",
-            author: "Federico Kereki"
+            title: "The Matrix",
+            image: "https://www.movieposters.com/cdn/shop/products/matrix.24x36_480x.progressive.jpg",
+            director: "The Wachowskis",
+            description: "A computer programmer discovers that reality as he knows it is a simulation created by machines, and joins a rebellion to break free."
         },
         {
             id: 3,
-            title: "JavaScript: The Good Parts",
-            image:
-                "https://images-na.ssl-images-amazon.com/images/I/5131OWtQRaL._SX381_BO1,204,203,200_.jpg",
-            author: "Douglas Crockford"
+            title: "Interstellar",
+            image: "https://www.movieposters.com/cdn/shop/products/interstellar2_480x.progressive.jpg",
+            director: "Christopher Nolan",
+            description: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival."
         },
         {
             id: 4,
-            title: "JavaScript: The Definitive Guide",
-            image:
-                "https://images-na.ssl-images-amazon.com/images/I/51HbNW6RzhL._SX218_BO1,204,203,200_QL40_FMwebp_.jpg",
-            author: "David Flanagan"
+            title: "The Dark Knight",
+            image: "https://www.movieposters.com/cdn/shop/products/darkknight.building.mp_480x.progressive.jpg",
+            director: "Christopher Nolan",
+            description: "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice."
         },
         {
             id: 5,
-            title: "The Road to React",
-            image:
-                "https://images-na.ssl-images-amazon.com/images/I/41MBLi5a4jL._SX384_BO1,204,203,200_.jpg",
-            author: "Robin Wieruch"
+            title: "Pulp Fiction",
+            image: "https://www.movieposters.com/cdn/shop/products/pulpfiction.2436_480x.progressive.jpg",
+            director: "Quentin Tarantino",
+            description: "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption."
         }
     ]);
     return (
@@ -51,11 +51,11 @@ export const MainView = () => {
             >
                 Click me!
             </button>
-            {books.map((book) => (
-                <BookCard key={book.id}
-                    bookData={book}
-                    onBookClick={(newSelectedBook) => {
-                        setSelectedBook(newSelectedBook)
+            {movies.map((movie) => (
+                <MovieCard key={movie.id}
+                    movieData={movie}
+                    onMovieClick={(newSelectedMovie) => {
+                        setSelectedMovie(newSelectedMovie)
                     }}
                 />
             ))}
