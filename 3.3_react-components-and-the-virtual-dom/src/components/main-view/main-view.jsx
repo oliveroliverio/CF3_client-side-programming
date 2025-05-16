@@ -44,22 +44,18 @@ export const MainView = () => {
     ]);
     return (
         <>
-            <button
-                onClick={() => {
-                    alert("Nice!");
-                }}
-            >
-                Click me!
-            </button>
-            {movies.map((movie) => (
-                <MovieCard key={movie.id}
-                    movieData={movie}
-                    onMovieClick={(newSelectedMovie) => {
-                        setSelectedMovie(newSelectedMovie)
-                    }}
-                />
-            ))}
-            <button>test</button>
+
+            {
+                movies.map((movie) => (
+                    <MovieCard key={movie.id}
+                        movieData={movie}
+                        onMovieClick={(newSelectedMovie) => {
+                            setSelectedMovie(newSelectedMovie)
+                        }}
+                    />
+                ))
+            }
+            < button > test</button >
         </>
     );
 };
