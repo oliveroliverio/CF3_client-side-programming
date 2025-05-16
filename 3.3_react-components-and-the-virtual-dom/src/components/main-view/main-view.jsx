@@ -52,7 +52,12 @@ export const MainView = () => {
                 Click me!
             </button>
             {books.map((book) => (
-                <BookCard key={book.id} bookData={book} />
+                <BookCard key={book.id}
+                    bookData={book}
+                    onBookClick={(newSelectedBook) => {
+                        setSelectedBook(newSelectedBook)
+                    }}
+                />
             ))}
             <button>test</button>
         </>
