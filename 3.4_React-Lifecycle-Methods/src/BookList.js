@@ -7,7 +7,7 @@ function BookList() {
 
     useEffect(() => {
         // This effect runs once when component mounts
-        fetch('https://openlibrary.org/subjects/javascript.json')
+        fetch('https://openlibrary.org/search.json?q=star+wars')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -15,7 +15,7 @@ function BookList() {
                 return response.json();
             })
             .then(data => {
-                setBooks(data.works.slice(0, 5)); // Get first 5 books
+                setBooks(data.docs.slice(0, 5)); // Get first 5 books
                 setIsLoading(false);
             })
             .catch(error => {
@@ -29,7 +29,7 @@ function BookList() {
 
     return (
         <div>
-            <h2>JavaScript Books (Hook Example with API)</h2>
+            <h2>Star Wars Books (Hook Example with API)</h2>
             <ul>
                 {books.map(book => (
                     <li key={book.key}>
