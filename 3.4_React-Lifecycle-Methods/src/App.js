@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
       <h1>React Lifecycle Methods Exercise</h1>
-      <ClassComponent />
+      <ClassComponent name="Student" />
     </div>
   );
 }

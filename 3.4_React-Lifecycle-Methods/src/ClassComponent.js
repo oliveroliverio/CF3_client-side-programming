@@ -29,16 +29,12 @@ class ClassComponent extends Component {
 
   render() {
     return (
-      <div>
-        <h2>Class Component</h2>
-        <p>This is a basic class component with lifecycle methods</p>
-        <p>Current Date: {this.state.currentDate.toLocaleDateString()}</p>
-        {/* Add a button to change the date to 5 days from now */}
-        <button onClick={() => this.setState({ currentDate: new Date(this.state.currentDate.getTime() + 5 * 24 * 60 * 60 * 1000) })}>Update Date</button>
-        <p>Current Time: {this.state.currentDate.toLocaleTimeString()}</p>
-        {/* add button that updates time when clicked */}
-        <button onClick={() => this.setState({ currentDate: new Date() })}> Update Time</button>
-      </div>
+      <>
+        <h2> Hello, {this.props.name}!</h2>
+        <p> The time is: {this.state.currentDate.toLocaleTimeString()}</p>
+        <p> The date is: {this.state.currentDate.toLocaleDateString()}</p>
+        <p> click on this button to update the time: <button onClick={() => this.setState({ currentDate: new Date() })}>Update Time</button></p>
+      </>
     );
   }
 }
