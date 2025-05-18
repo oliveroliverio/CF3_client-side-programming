@@ -9,8 +9,10 @@ class ClassComponent extends Component {
   }
 
   componentDidMount() {
-    // You'll implement this during your practice
+    // start timer when component mounts
+    this.timer = setInterval(() => this.setState({ currentDate: new Date() }), 1000);
     console.log('Component mounted');
+    console.log(`timer started: ${this.timer}`)
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -21,6 +23,8 @@ class ClassComponent extends Component {
   componentWillUnmount() {
     // You'll implement this during your practice
     console.log('Component will unmount');
+    clearInterval(this.timerID)
+    console.log(`timer stopped: ${this.timerID}`)
   }
 
   render() {
