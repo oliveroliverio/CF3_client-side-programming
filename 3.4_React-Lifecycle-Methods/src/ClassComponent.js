@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class ClassComponent extends Component {
   constructor(props) {
@@ -47,3 +48,9 @@ class ClassComponent extends Component {
 }
 
 export default ClassComponent;
+
+
+// Add PropTypes validation
+ClassComponent.propTypes = {
+  name: PropTypes.string.isRequired
+};
