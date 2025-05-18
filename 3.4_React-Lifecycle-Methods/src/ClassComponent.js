@@ -4,7 +4,8 @@ class ClassComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentDate: new Date()
+      currentDate: new Date(),
+      updateCount: 0
     };
   }
 
@@ -16,8 +17,13 @@ class ClassComponent extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // You'll implement this during your practice
-    console.log('Component updated');
+    // log when component updates
+    if (prevState.currentDate !== this.state.currentDate) {
+      this.setState(state => ({
+        updateCount: state.updateCount + 1
+      }))
+      console.log(`Component updated ${this.state.updateCount} times`)
+    }
   }
 
   componentWillUnmount() {
@@ -33,6 +39,7 @@ class ClassComponent extends Component {
         <h2> Hello, {this.props.name}!</h2>
         <p> The time is: {this.state.currentDate.toLocaleTimeString()}</p>
         <p> The date is: {this.state.currentDate.toLocaleDateString()}</p>
+        <p> Number of updates: {this.state.updateCount}</p>
         <p> click on this button to update the time: <button onClick={() => this.setState({ currentDate: new Date() })}>Update Time</button></p>
       </>
     );
