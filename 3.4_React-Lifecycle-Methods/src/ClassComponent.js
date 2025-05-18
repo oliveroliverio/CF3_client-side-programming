@@ -32,6 +32,8 @@ class ClassComponent extends Component {
         {/* Add a button to change the date to 5 days from now */}
         <button onClick={() => this.setState({ currentDate: new Date(this.state.currentDate.getTime() + 5 * 24 * 60 * 60 * 1000) })}>Update Date</button>
         <p>Current Time: {this.state.currentDate.toLocaleTimeString()}</p>
+        {/* add button that updates time when clicked */}
+        <button onClick={() => this.setState({ currentDate: new Date() })}> Update Time</button>
       </div>
     );
   }
